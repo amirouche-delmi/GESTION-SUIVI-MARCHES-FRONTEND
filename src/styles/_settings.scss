@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "font-1";
+  src: url(./fonts/JosefinSans-ExtraLight.ttf);
+}
+
+@font-face {
+  font-family: "font-2";
+  src: url(./fonts/JosefinSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: "font-3";
+  src: url(./fonts/JosefinSans-Bold.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: monospace;
+  overflow-y: scroll;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.success {
+  margin-top: 30px;//
+  color: rgb(66, 211, 66);
+  font-weight: bold;
+}

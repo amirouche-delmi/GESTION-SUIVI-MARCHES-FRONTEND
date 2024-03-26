@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SignInForm from "./SignInForm";
+import { toast } from "react-hot-toast";
 
 const SignUpForm = () => {
-  const [formSubmit, setFormSubmit] = useState(false);
   const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
-  const [telephone, setTelephone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
@@ -15,8 +12,6 @@ const SignUpForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const nomError = document.querySelector(".nom.error");
-    const prenomError = document.querySelector(".prenom.error");
-    const telephoneError = document.querySelector(".telephone.error");
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
     const passwordConfirmError = document.querySelector(".password-confirm.error");
@@ -36,155 +31,137 @@ const SignUpForm = () => {
         try {
           const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/register`, {
             nom,
-            prenom,
-            telephone,
             email,
             password,
             role
           });  
           if (response.data.errors) {
             nomError.innerHTML = response.data.errors.nom;
-            prenomError.innerHTML = response.data.errors.prenom ;
-            telephoneError.innerHTML = response.data.errors.telephone;
             emailError.innerHTML = response.data.errors.email;
             roleError.innerHTML = response.data.errors.role;
           } else {
-            setFormSubmit(true);
+            toast.success(
+              "Votre compte a été créé avec succès veuillez se connecter.",
+              {
+                duration: 6000,
+                position: "bottom-right"
+              }
+            );
+
+            setNom("");
+            setEmail("");
+            setPassword("");
+            setControlPassword("");
+            setRole("");
+            document.getElementById('DM').checked = false;
+            document.getElementById('CCM').checked = false;
+            nomError.innerHTML="";
+            emailError.innerHTML="";
+            passwordError.innerHTML = "";
+            passwordConfirmError.innerHTML = "";
+            roleError.innerHTML=""
           }
-        } catch (error) {
-          console.error("Erreur lors de l'enregistrement : ", error);
+        } catch (err) {
+          console.log(err);
+          toast.error(
+            "Inscription échoué !",
+            {
+              duration: 6000,
+              position: "bottom-let"
+            }
+          );
         }
       }
     }
   };
 
   return (
-    <>
-      {formSubmit ? (
-        <>
-          <SignInForm />
-          {document.getElementById("login").classList.add("active-btn")}
-          {document.getElementById("register").classList.remove("active-btn")}
-          <span></span>
-          <h4 className="success">
-            Votre compte a été créé avec succès. Veuillez attendre la validation de l'administrateur pour pouvoir vous connecter.
-          </h4>
-        </>
-      ) : (
-        <form action="" onSubmit={handleRegister} id="sign-up-form">
-          {/* ------------------------------------------------------------------------- */}
-          <label htmlFor="nom">Nom</label>
-          <br />
-          <input
-            type="text"
-            name="nom"
-            id="nom"
-            required
-            onChange={(e) => setNom(e.target.value)}
-            value={nom}
-          />
-          <div className="nom error"></div>
-          <br />
-          {/* ------------------------------------------------------------------------- */}
-          <label htmlFor="prenom">Prénom</label>
-          <br />
-          <input
-            type="text"
-            name="prenom"
-            id="prenom"
-            required
-            onChange={(e) => setPrenom(e.target.value)}
-            value={prenom}
-          />
-          <div className="prenom error"></div>
-          <br />
-          {/* ------------------------------------------------------------------------- */}
-          <label htmlFor="telephone">Téléphone</label>
-          <br />
-          <input
-            type="text"
-            name="telephone"
-            id="telephone"
-            required
-            onChange={(e) => setTelephone(e.target.value)}
-            value={telephone}
-          />
-          <div className="telephone error"></div>
-          <br />
-          {/* ------------------------------------------------------------------------- */}
-          <label htmlFor="email">Email</label>
-          <br />
-          <input
-            type="text"
-            name="email"
-            id="email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <div className="email error"></div>
-          <br />
-          {/* ------------------------------------------------------------------------- */}
-          <label htmlFor="password">Mot de passe</label>
-          <br />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-          <div className="password error"></div>
-          <br />
-          {/* ------------------------------------------------------------------------- */}
-          <label htmlFor="password-conf">Confirmer mot de passe</label>
-          <br/>
-          <input
-            type="password"
-            name="password"
-            id="password-conf"
-            required
-            onChange={(e) => setControlPassword(e.target.value)}
-            value={controlPassword}
-          />
-          <div className="password-confirm error"></div>
-          <br />
-          {/* ------------------------------------------------------------------------- */}
-          <label>Rôle</label>
-          <div className="role">
-            <div className="margin-radio">
-              <label htmlFor="gestionnaire" className="label-radio">Gestionnaire</label>
+    <>      
+      <form onSubmit={handleRegister} className="signin-signup-form">
+        <h2>S'inscrire</h2>
+        <input
+          type="text"
+          name="nom"
+          id="nom"
+          required
+          onChange={(e) => setNom(e.target.value)}
+          value={nom}
+          placeholder="Nom"
+        />
+        <div className="nom error"></div>
+        <br />
+        {/* ------------------------------------------------------------------------- */}
+        <input
+          type="text"
+          name="email"
+          id="email"
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="Email"
+        />
+        <div className="email error"></div>
+        <br />
+        {/* ------------------------------------------------------------------------- */}
+        <input
+          type="password"
+          name="password"
+          id="password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          placeholder="Mot de passe"
+        />
+        <div className="password error"></div>
+        <br />
+        {/* ------------------------------------------------------------------------- */}
+        <input
+          type="password"
+          name="password"
+          id="password-conf"
+          required
+          onChange={(e) => setControlPassword(e.target.value)}
+          value={controlPassword}
+          placeholder="Confirmer mot de passe"
+        />
+        <div className="password-confirm error"></div>
+        {/* ------------------------------------------------------------------------- */}
+        <div className="role-container">
+          <label>Rôle :</label>
+          <div className="role-items">
+            <div className="role-item">
+              <label htmlFor="DM">DM</label>
               <input
                 type="radio"
                 name="role"
-                id="gestionnaire"
+                id="DM"
                 required
-                value="Gestionnaire"
+                value="DM"
                 onChange={(e) => {
                   setRole(e.target.value);
                 }}
               />
             </div>
-            <div className="margin-radio">
-              <label htmlFor="observateur" className="label-radio">Observateur</label>
+            <div className="role-item">
+              <label htmlFor="CCM">CCM</label>
               <input
                 type="radio"
                 name="role"
-                id="observateur"
+                id="CCM"
                 required
-                value="Observateur"
+                value="CCM"
                 onChange={(e) => {
                   setRole(e.target.value);
                 }}
               />
-            </div>
-          </div>
-          <div className="role error"></div>
-          {/* ------------------------------------------------------------------------- */}
-          <input type="submit" value="Valider inscription" />
-        </form>
-      )}
+            </div>              
+          </div>            
+        </div>
+        <div className="role error"></div>
+        <br />
+        {/* ------------------------------------------------------------------------- */}
+        <input type="submit" className="submit-button" value="Valider inscription" />          
+      </form>
     </>
   );
 };

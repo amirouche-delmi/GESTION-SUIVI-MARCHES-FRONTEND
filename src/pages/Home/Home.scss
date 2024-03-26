@@ -1,0 +1,132 @@
+  .home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom right, #4CAF50, #2196F3);
+    height: 100vh;
+    
+    .home-header {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-img {
+      width: 50px;
+      height: auto;
+      border-radius: 5px;
+      margin-left: -30px;
+    }
+    
+    .logo-text {
+      margin-left: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+    .home-content { 
+
+      .log-container {
+        width: 450px;
+        margin: 0 auto;
+        padding: 20px;
+        background: rgb(255, 255, 255);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3); 
+        border-radius: 8px;
+        
+  
+        .log-footer {
+          margin-top: 20px;
+          text-align: center;
+          
+          div {
+            display: none;
+          }
+          .active-div {
+            display: inline;
+          }
+          .active-span {
+            color: #007bff;
+            cursor: pointer;
+          }
+  
+        }    
+  
+        .signin-signup-form {
+          h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333333;
+            font-weight: 700;
+          }
+  
+          input[type="email"], input[type="text"], input[type="password"] {          
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+  
+            &:focus {
+              border-color: #007bff;
+            }
+          }
+  
+          .role-container {
+            display: inline-flex;
+            margin-top: 15px;
+            font-size: small;
+          }
+          
+          .role-item {
+            display: inline-flex;
+            margin-left: 20px;
+          }
+  
+          .role-item label {
+            margin-right: 5px;
+          }
+  
+  
+          .submit-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }        
+          .submit-button:hover {
+            background-color: #0056b3; /* Couleur de fond au survol */
+          }
+        }
+      }
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+      font-size: small;
+    }
+    .success {
+      color: rgb(66, 211, 66);
+      font-weight: bold;
+      font-size: small;
+    }
+  }
+   
+    
+    

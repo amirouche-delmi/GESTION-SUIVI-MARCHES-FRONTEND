@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,6 @@ const SignInForm = () => {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
-    const compteValideError = document.querySelector(".compteValide.error");
 
     axios({
       method: "POST",
@@ -25,8 +25,17 @@ const SignInForm = () => {
         console.log(res.data.errors);
         emailError.innerHTML = res.data.errors.email;
         passwordError.innerHTML = res.data.errors.password;
-        compteValideError.innerHTML = res.data.errors.compteValide;
+        if(res.data.errors.compteValide !== "") {
+          toast.error(
+            "Votre compte n'est encore validé veuillez attendre la validation pour pouvoir se connecter !",
+            {
+              duration: 6000,
+              position: "bottom-right"
+            }
+          );
+        }
       } else {
+        toast.loading('Chargement en cours...');
         window.location = "/";
       }
     })
@@ -36,33 +45,34 @@ const SignInForm = () => {
   };
 
   return (
-    <form action="" onSubmit={handleLogin} id="sign-up-form">
-      <label htmlFor="email">Email</label>
-      <br />
-      <input
-        type="text"
-        name="email"
-        id="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-      <div className="email error"></div>
-      <br />
-      <label htmlFor="password">Mot de passe</label>
-      <br />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <div className="password error"></div>
-      <br />
-      <div className="compteValide error"></div>
-      <br />
-      <input type="submit" value="Se connecter" />
-    </form>
+    <>
+      <form action="" onSubmit={handleLogin} className="signin-signup-form">
+        <h2>Se connecter</h2>
+        <input
+          type="text"
+          name="email"
+          id="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="Email"
+          required
+        />
+        <div className="email error"></div>
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          placeholder="Mot de passe"
+          required
+        />
+        <div className="password error"></div>
+        <br />
+        <input type="submit" className="submit-button" value="Se connecter" />
+      </form>
+    </>
   );
 };
 

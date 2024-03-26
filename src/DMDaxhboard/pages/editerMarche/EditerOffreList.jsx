@@ -117,24 +117,6 @@ export default function OffreList() {
       },
     },
     {
-      field: "action",
-      headerName: "Action",
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/editer-offre/" + params.row._id}>
-              <button className="productListEdit">Éditer</button>
-            </Link>
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
-          </>
-        );
-      },
-    },
-    {
       field: "DetailsProposition",
       headerName: "Details Proposition",
       width: 200,
@@ -170,20 +152,29 @@ export default function OffreList() {
           );
         },
     },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/editer-offre/" + params.row._id}>
+              <button className="productListEdit">Éditer</button>
+            </Link>
+            <DeleteOutline
+              className="productListDelete"
+              onClick={() => handleDelete(params.row._id)}
+            />
+          </>
+        );
+      },
+    },
   ];
   
   return (
     <div className="OffreList">
-      {(isEmpty(allOffreData[0]) || isEmpty(allSoumissionnaireData[0])) ? 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-          <p style={{ 
-            textAlign: "center", 
-            fontSize: "1.1rem",
-            lineHeight: "1.5", 
-          }}>
-            Chargement...
-          </p>
-        </div> :
+      {(!isEmpty(allOffreData[0]) && !isEmpty(allSoumissionnaireData[0])) ? 
         <DataGrid
           rows={allOffreData.filter(item => item.marcheID === marcheData._id)}
           disableSelectionOnClick
@@ -193,6 +184,16 @@ export default function OffreList() {
           getRowId={(row) => row['_id']}
           className="data-grid"
         />
+        :
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
+          <p style={{ 
+            textAlign: "center", 
+            fontSize: "1.1rem",
+            lineHeight: "1.5", 
+          }}>
+            Chargement...
+          </p>
+        </div>
       }
     </div>
   )

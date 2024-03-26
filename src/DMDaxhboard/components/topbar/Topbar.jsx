@@ -1,8 +1,10 @@
 import React from "react";
 import "./topbar.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
+import ChatIcon from '@mui/icons-material/Chat';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import Logout from "../../../components/log/Logout";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Topbar() {
   return (
@@ -16,15 +18,21 @@ export default function Topbar() {
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
-            <NotificationsNone />
-            <span className="topIconBadge">2</span>
+            <Link to="/email" className="link">
+              <AlternateEmailRoundedIcon />
+              <span className="topIconBadge">2</span>      
+            </Link>
           </div>
           <div className="topbarIconContainer">
-            <Language />
-            <span className="topIconBadge">2</span>
+            <Link to="/messages" className="link">
+              <ChatIcon />
+              <span className="topIconBadge">2</span>
+            </Link>
           </div>
-          <div className="topbarIconContainer">
-            <Settings />
+          <div className="topbarIconContainer">             
+            <Link to="/" className="link">
+              <LeaderboardIcon />
+            </Link>
           </div>
           <NavLink exact to="/profil">
           <img src="./imgs/dm.jpg" alt="profil" className="topAvatar" />

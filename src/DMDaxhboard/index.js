@@ -13,6 +13,10 @@ import Besoins from "./pages/Besoins";
 import ValidationsPrealables from "./pages/ValidationsPrealables";
 import CahiersDesCharges from "./pages/CahiersDesCharges";
 import AppelsDOffres from "./pages/AppelsDOffres";
+import Soumissionnaires from "./pages/Soumissionnaires";
+import Offres from "./pages/Offres";
+import AttributionsMarches from "./pages/AttributionsMarches";
+import Contrats from "./pages/Contrats";
 import Email from "./pages/email/Email";
 import Messages from "./pages/messages/Messages";
 
@@ -35,6 +39,10 @@ const AdminDashboard = () => {
           <Route path="/validations-prealables" element={<ValidationsPrealables />} />
           <Route path="/cahiers-des-charges" element={<CahiersDesCharges />} />
           <Route path="/appels-d-offres" element={<AppelsDOffres />} />
+          <Route path="/soumissionnaires" element={<Soumissionnaires />} />
+          <Route path="/offres" element={<Offres />} />
+          <Route path="/attributions-marches" element={<AttributionsMarches />} />
+          <Route path="/contrats" element={<Contrats />} />
           <Route path="/email" element={<Email />} />
           <Route path="/Messages" element={<Messages />} />
           <Route path="*" element={<Navigate to="/" />} />

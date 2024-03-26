@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { getMarche } from "../../../../actions/marcheActions";
+import { getAllSoumissionnaire } from "../../../../actions/soumissionnaireActions";
 
 export default function AjouterOffreForm() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function AjouterOffreForm() {
         detailsProposition
       });
       dispatch(getMarche(marcheData._id))
+      dispatch(getAllSoumissionnaire())
       
       setNomSoumissionnaire("");
       setEmailSoumissionnaire("");

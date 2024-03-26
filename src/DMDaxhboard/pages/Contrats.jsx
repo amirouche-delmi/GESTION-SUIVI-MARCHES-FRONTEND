@@ -4,7 +4,7 @@ import { formatDate, isEmpty } from "../../utils/utils";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function Besoins() {
+export default function Contrats() {
   const [data, setData] = useState([])
   const userData = useSelector((state) => state.userReducer);
   

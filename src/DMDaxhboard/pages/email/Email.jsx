@@ -69,6 +69,7 @@ function Email() {
           value={body}
           onChange={(e) => setBody(e.target.value)}
           required
+          rows={10}
         ></textarea>
         <button type="submit" disabled={loading}>Envoyer</button>
       </form>

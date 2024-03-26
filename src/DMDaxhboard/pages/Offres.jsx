@@ -4,14 +4,14 @@ import { formatDate, isEmpty } from "../../utils/utils";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function Besoins() {
+export default function Offres() {
   const [data, setData] = useState([])
   const userData = useSelector((state) => state.userReducer);
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/besoin`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/offre`);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -36,73 +36,61 @@ export default function Besoins() {
       },
     },
     {
-      field: "besoin",
-      headerName: "Besoin",
-      width: 155,
+      field: "DetailsProposition",
+      headerName: "Details Proposition",
+      width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-              {params.row.intitule}
+          <div className="productListItem" title={params.row.detailsProposition}>
+              {params.row.detailsProposition}
           </div>
         );
       },
     },
     {
-      field: "description",
-      headerName: "Description",
-      width: 170,
+      field: "resultatEvaluation",
+      headerName: "Resultat Evaluation",
+      width: 150,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            {params.row.description}
+          <div className={"productListItem " + params.row.resultatEvaluation}>
+            {params.row.resultatEvaluation || "---"}
           </div>
         );
       },
     },
     {
-      field: "objectifs",
-      headerName: "Objectifs",
-      width: 170,
+      field: "noteObtenue",
+      headerName: "Note Obtenue",
+      width: 130,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.objectifs}
+              {(params.row.noteObtenue || "---") + "/100"}
           </div>
         );
       },
     },
     {
-      field: "estimationCout",
-      headerName: "Estimation Cout",
-      width: 170,
+      field: "motif",
+      headerName: "Motif",
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.estimationCout}
+              {params.row.motif || "---"}
           </div>
         );
       },
     },
     {
-      field: "exprimePar",
-      headerName: "Exprime Par",
-      width: 170,
+      field: "membresCommission",
+      headerName: "Membres Commission",
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.exprimePar}
-          </div>
-        );
-      },
-    },
-    {
-      field: "dateExpression",
-      headerName: "Date Expression",
-      width: 160,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {formatDate(params.row.dateExpression)}
+              {params.row.membresCommission[0] || "---"}
           </div>
         );
       },
@@ -110,7 +98,7 @@ export default function Besoins() {
     {
       field: "createdAt",
       headerName: "Créé le",
-      width: 160,
+      width: 165,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -122,14 +110,14 @@ export default function Besoins() {
     {
       field: "updatedAt",
       headerName: "Mis à jour le",
-      width: 160,
+      width: 165,
       renderCell: (params) => {
         return (
           <div className="productListItem">
             {formatDate(params.row.updatedAt)}
           </div>
-        );
-      },
+          );
+        },
     },
   ];
   

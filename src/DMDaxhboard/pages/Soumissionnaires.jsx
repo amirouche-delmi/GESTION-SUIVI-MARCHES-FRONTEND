@@ -4,14 +4,13 @@ import { formatDate, isEmpty } from "../../utils/utils";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function Besoins() {
+export default function Soumissionnaires() {
   const [data, setData] = useState([])
-  const userData = useSelector((state) => state.userReducer);
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/besoin`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/soumissionnaire`);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -36,73 +35,49 @@ export default function Besoins() {
       },
     },
     {
-      field: "besoin",
-      headerName: "Besoin",
-      width: 155,
+      field: "nom",
+      headerName: "Nom",
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-              {params.row.intitule}
+              {params.row.nom}
           </div>
         );
       },
     },
     {
-      field: "description",
-      headerName: "Description",
-      width: 170,
+      field: "email",
+      headerName: "Email",
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.description}
+            {params.row.email}
           </div>
         );
       },
     },
     {
-      field: "objectifs",
-      headerName: "Objectifs",
-      width: 170,
+      field: "telephone",
+      headerName: "Telephone",
+      width: 130,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.objectifs}
+            {params.row.telephone}
           </div>
         );
       },
     },
     {
-      field: "estimationCout",
-      headerName: "Estimation Cout",
-      width: 170,
+      field: "statut",
+      headerName: "Statut",
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.estimationCout}
-          </div>
-        );
-      },
-    },
-    {
-      field: "exprimePar",
-      headerName: "Exprime Par",
-      width: 170,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {params.row.exprimePar}
-          </div>
-        );
-      },
-    },
-    {
-      field: "dateExpression",
-      headerName: "Date Expression",
-      width: 160,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {formatDate(params.row.dateExpression)}
+            {params.row.statut}
           </div>
         );
       },
@@ -146,7 +121,7 @@ export default function Besoins() {
           </p>
         </div> :
         <DataGrid
-          rows={data.filter(item => item.dmID === userData._id)}
+          rows={data}
           disableSelectionOnClick
           columns={columns}
           pageSize={8}

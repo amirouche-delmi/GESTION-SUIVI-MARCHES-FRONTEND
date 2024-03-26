@@ -22,6 +22,7 @@ import {
   Group,
 } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 
 export default function Sidebar() {
   const location = useLocation();
@@ -85,21 +86,27 @@ export default function Sidebar() {
                 Appels d'offres
               </Link>
             </li>
-            <li className={`sidebarListItem ${location.pathname === '/rapports' ? 'active' : ''}`}>
+            <li className={`sidebarListItem ${location.pathname === '/soumissionnaires' ? 'active' : ''}`}>
               <Group className="sidebarIcon" />
-              <Link to="/rapports" className="link">
+              <Link to="/soumissionnaires" className="link">
                 Soumissionnaires
               </Link>
             </li>
-            <li className={`sidebarListItem ${location.pathname === '/rapports' ? 'active' : ''}`}>
+            <li className={`sidebarListItem ${location.pathname === '/offres' ? 'active' : ''}`}>
               <Money className="sidebarIcon" />
-              <Link to="/rapports" className="link">
+              <Link to="/offres" className="link">
                 Offres
               </Link>
             </li>
-            <li className={`sidebarListItem ${location.pathname === '/rapports' ? 'active' : ''}`}>
-              <Link to="/rapports" className="link">
-                <Description className="sidebarIcon" />
+            <li className={`sidebarListItem ${location.pathname === '/attributions-marches' ? 'active' : ''}`}>
+              <AssignmentTurnedInIcon className="sidebarIcon" />
+              <Link to="/attributions-marches" className="link">
+                Attributions Marchés
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/contrats' ? 'active' : ''}`}>
+              <Description className="sidebarIcon" />
+              <Link to="/contrats" className="link">
                 Contrats
               </Link>
             </li>

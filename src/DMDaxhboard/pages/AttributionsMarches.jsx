@@ -4,14 +4,14 @@ import { formatDate, isEmpty } from "../../utils/utils";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function Besoins() {
+export default function AttributionsMarches() {
   const [data, setData] = useState([])
   const userData = useSelector((state) => state.userReducer);
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/besoin`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/attribution-marche`);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -36,8 +36,8 @@ export default function Besoins() {
       },
     },
     {
-      field: "besoin",
-      headerName: "Besoin",
+      field: "commentaires",
+      headerName: "Commentaires",
       width: 155,
       renderCell: (params) => {
         return (
@@ -48,61 +48,13 @@ export default function Besoins() {
       },
     },
     {
-      field: "description",
-      headerName: "Description",
-      width: 170,
+      field: "PVCommission",
+      headerName: "PVCommission",
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.description}
-          </div>
-        );
-      },
-    },
-    {
-      field: "objectifs",
-      headerName: "Objectifs",
-      width: 170,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {params.row.objectifs}
-          </div>
-        );
-      },
-    },
-    {
-      field: "estimationCout",
-      headerName: "Estimation Cout",
-      width: 170,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {params.row.estimationCout}
-          </div>
-        );
-      },
-    },
-    {
-      field: "exprimePar",
-      headerName: "Exprime Par",
-      width: 170,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {params.row.exprimePar}
-          </div>
-        );
-      },
-    },
-    {
-      field: "dateExpression",
-      headerName: "Date Expression",
-      width: 160,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {formatDate(params.row.dateExpression)}
+              <a className="detail-content" href={`${process.env.REACT_APP_API_URL}/api/uploads/attributionMarche/${params.row._id}.pdf`} target="_blank" rel="noopener noreferrer">Ouvrir le fichier</a>
           </div>
         );
       },

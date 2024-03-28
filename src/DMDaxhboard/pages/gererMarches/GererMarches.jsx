@@ -134,7 +134,7 @@ export default function GererMarches() {
               <button className="consulterButton">
                 <Visibility className="consulterIcon" />
                 Consulter
-            </button>
+              </button>
             </Link>
             <Link to={"/editer-marche/" + params.row._id}>
               <button className="productListEdit">Éditer</button>

@@ -61,9 +61,14 @@ export const formatDate = (dateString) => {
 }
 
 export const formaterNumeroTelephone = (numero) => {
-  const numeroFormate = numero.replace(/.{2}/g, '$& ');
-  return numeroFormate;
+  if (typeof numero === 'string') {
+    const numeroFormate = numero.replace(/.{2}/g, '$& ');
+    return numeroFormate;
+  } else {
+    return numero;
+  }
 };
+
 
 export const isValidEmail = (email) => {
   const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -10,90 +10,121 @@ import {
   MailOutline,
   DynamicFeed,
   ChatBubbleOutline,
-  WorkOutline,
-  Report,
+  AddCircleOutlineOutlined,
+  Business,
+  FormatListBulleted,
+  PlaylistAddCheck,
+  Description,
+  Assignment,
+  Money,
+  Group,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 
 export default function Sidebar() {
+  const location = useLocation();
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Dashboard</h3>
+          <h3 className="sidebarTitle">Tableau de bord</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
-            <li className="sidebarListItem active">
-              <LineStyle className="sidebarIcon" />
-              Home
-            </li>
-            </Link>
-            <li className="sidebarListItem">
+            <li className={`sidebarListItem ${location.pathname === '/' ? 'active' : ''}`}>
               <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
-              Sales
+              <Link to="/" className="link">
+                Analytique
+              </Link>
             </li>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
+          <h3 className="sidebarTitle">Menu rapide</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
-              <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
-                Users
-              </li>
-            </Link>
-            <Link to="/products" className="link">
-              <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
-                Products
-              </li>
-            </Link>
-            <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              Transactions
+            <li className={`sidebarListItem ${location.pathname === '/profil' ? 'active' : ''}`}>
+              <PermIdentity className="sidebarIcon" />
+              <Link to="/profil" className="link">
+                Profil
+              </Link>
             </li>
-            <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
-              Reports
+            <li className={`sidebarListItem ${location.pathname === '/gerer-utilisateurs' ? 'active' : ''}`}>
+              <ManageAccountsOutlinedIcon className="sidebarIcon" />
+              <Link to="/gerer-utilisateurs" className="link">
+                Gerer Utilisateurs
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/gerer-marches' ? 'active' : ''}`}>
+              <Business className="sidebarIcon" />
+              <Link to="/gerer-marches" className="link">
+                Gérer Marchés
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/besoins' ? 'active' : ''}`}>
+              <FormatListBulleted className="sidebarIcon" />
+              <Link to="/besoins" className="link">
+                Besoins
+              </Link>
+            </li>
+            <li style={{ whiteSpace: 'nowrap' }} className={`sidebarListItem ${location.pathname === '/validations-prealables' ? 'active' : ''}`}>
+              <PlaylistAddCheck className="sidebarIcon" />
+              <Link to="/validations-prealables" className="link">
+                Validations Préalables
+              </Link>
+            </li>
+            <li style={{ whiteSpace: 'nowrap' }} className={`sidebarListItem ${location.pathname === '/cahiers-des-charges' ? 'active' : ''}`}>
+              <Description className="sidebarIcon" />
+              <Link to="/cahiers-des-charges" className="link">
+                Cahiers Des Charges
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/appels-d-offres' ? 'active' : ''}`}>
+              <Assignment className="sidebarIcon" />
+              <Link to="/appels-d-offres" className="link">
+                Appels d'offres
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/soumissionnaires' ? 'active' : ''}`}>
+              <Group className="sidebarIcon" />
+              <Link to="/soumissionnaires" className="link">
+                Soumissionnaires
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/offres' ? 'active' : ''}`}>
+              <Money className="sidebarIcon" />
+              <Link to="/offres" className="link">
+                Offres
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/attributions-marches' ? 'active' : ''}`}>
+              <AssignmentTurnedInIcon className="sidebarIcon" />
+              <Link to="/attributions-marches" className="link">
+                Attributions Marchés
+              </Link>
+            </li>
+            <li className={`sidebarListItem ${location.pathname === '/contrats' ? 'active' : ''}`}>
+              <Description className="sidebarIcon" />
+              <Link to="/contrats" className="link">
+                Contrats
+              </Link>
             </li>
           </ul>
         </div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
+            <li className={`sidebarListItem ${location.pathname === '/email' ? 'active' : ''}`}>
               <MailOutline className="sidebarIcon" />
-              Mail
+              <Link to="/email" className="link">
+                Mail
+              </Link>
             </li>
-            <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li className="sidebarListItem">
+            <li className={`sidebarListItem ${location.pathname === '/messages' ? 'active' : ''}`}>
               <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <WorkOutline className="sidebarIcon" />
-              Manage
-            </li>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
-              Reports
+              <Link to="/messages" className="link">
+                Messages
+              </Link>
             </li>
           </ul>
         </div>

@@ -3,7 +3,7 @@ import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Profil from "./pages/profil/Profil";
-import GererUsers from "./pages/gererUsers/GererUsers";
+import AjouterMarche from "./pages/ajouterMarche/AjouterMarche";
 import GererMarches from "./pages/gererMarches/GererMarches";
 import EditerMarche from "./pages/editerMarche/EditerMarche";
 import ConsulterMarche from "./pages/consulterMarche/ConsulterMarche";
@@ -19,7 +19,7 @@ import Contrats from "./pages/Contrats";
 import Email from "./pages/email/Email";
 import Messages from "./pages/messages/Messages";
 
-const AdminDashboard = () => {
+const DMDashboard = () => {
 
   return (
     <Router>
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/profil" element={<Profil />} />
-          <Route path="/gerer-utilisateurs" element={<GererUsers/>} />
+          <Route path="/ajouter-marche" element={<AjouterMarche/>} />
           <Route path="/gerer-marches" element={<GererMarches />} />
           <Route path="/editer-marche/:marcheID" element={<EditerMarche />} />
           <Route path="/editer-offre/:offreID" element={<EditerOffre />} />
@@ -51,4 +51,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default DMDashboard;

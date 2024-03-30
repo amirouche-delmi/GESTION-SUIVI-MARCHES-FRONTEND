@@ -1,0 +1,106 @@
+.productList {
+    margin: 0px 20px 10px 275px;
+    transform: translateX(-255px);
+    
+    h2 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .data-grid {
+        flex: 6;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        width: calc(100% + 255px);    
+        overflow: hidden;
+        overflow-x: auto;
+    }
+    .data-grid ::-webkit-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+    .data-grid ::-moz-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+
+    .productListItem {
+        display: flex; 
+        align-items: center; 
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overflow-x: auto;
+    }
+    
+    .productListItem::-webkit-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+    .productListItem::-moz-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+      
+    .linearProgressContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 25px;
+        // border: 1px solid rgb(12, 106, 248);
+        background-color: #ebf1fe;
+        color: #2a7ade;
+        border-radius: 5px;
+    }
+    
+    .linearProgress {
+        width: 70%;
+        height: 10px;
+    }
+      
+    
+    .compteValide{
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        background-color: #3bb077;
+        color: white;
+        cursor: pointer;
+        margin-right: 10px;
+        width: 80px;
+        height: 28px;
+      }
+    
+    .compteNonValide{
+    border: none;
+    border-radius: 10px;
+    padding: 5px 5px;
+    background-color: #ee3881;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+    height: 28px;
+    }
+    
+    .productListDelete{
+        color: red;
+        cursor: pointer;
+    }
+    
+    .consulterIcon{
+        font-size: 16px !important;
+        margin-right: 5px;
+    }
+}
+
+
+
+
+
+
+
+
+

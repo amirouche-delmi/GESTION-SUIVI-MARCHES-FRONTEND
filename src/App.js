@@ -7,8 +7,8 @@ import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 import Loading from './pages/Loading/Loading';
 import { getUser } from "./actions/userActions";
+import DMDashboard from './DMDashboard';
 import AdminDashboard from './AdminDashboard';
-import DMDashboard from './DMDaxhboard';
 import CCMDashboard from './CCMDashboard';
 
 function App() {
@@ -18,20 +18,23 @@ function App() {
 
   useEffect(() => {
     const fetchToken = async () => {
-      await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}/jwtid`,
-        withCredentials: true,
-      })
-      .then((res) => {
+      try {
+        const res = await axios({
+          method: "get",
+          url: `${process.env.REACT_APP_API_URL}/jwtid`,
+          withCredentials: true,
+        });
         setUid(res.data);
-      })
-      .catch((err) => console.log("No token"));
+        if (uid) {
+          await dispatch(getUser(uid));
+        }
+      } catch (err) {
+        console.log("No token");
+      }
     };
     fetchToken();
-
-    if (uid) dispatch(getUser(uid));
   }, [uid, dispatch]);
+  
 
   return (
     <UidContext.Provider value={uid} >      
@@ -50,11 +53,12 @@ function App() {
         </Router>
       ) : (userData.role === 'Admin' ? (            
         <AdminDashboard />              
-      ) : userData.role === 'DM' ? (
-        <DMDashboard />
       ) : (
-        <CCMDashboard />
+        <DMDashboard />
       )))}       
+      {/* ) : (
+        <CCMDashboard />
+      )))}        */}
     </UidContext.Provider>    
   );
 }

@@ -1,0 +1,302 @@
+.editer-offre-container {
+    flex: 5;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    padding: 30px;
+    padding-top: 25px;
+    margin: 0px 20px 10px 20px;
+    font-size: 120%;
+
+  // ------------------------------------------------------------
+
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  //  ------------------------------------------------------------------ 
+
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 25px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 15px;
+  } 
+
+  .step-item {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    background-color: #ccc;
+    border-right: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .step-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .step-color {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: width 1s; 
+  }
+
+  .active-step {
+    background-color: #007bff;
+    animation: fillProgress 3s forwards;
+  }
+
+  @keyframes fillProgress {
+    100% {
+      width: 100%; 
+    }
+  }
+
+  .completed-step {
+    width: 100%;
+    background-color: #007bff;
+    animation: changeColorAndMove 3s forwards;
+  }
+
+  @keyframes changeColorAndMove {
+    100% {
+      background-color: #28a745;      
+    }
+  }
+
+//  ------------------------------------------------------------------ 
+.edit-container {  
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-sidebar {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px 20px 0;
+  padding: 20px;
+  background-color: rgb(249, 249, 255);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  font-size: small;
+  padding: 20px;
+
+  h3{
+    margin-bottom: 10px;
+    font-weight: 900;
+  }
+}
+
+.edit-sidebar-itmes {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+
+  .edit-sidebar-item {
+    margin-top: 0px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .edit-sidebar-item.active,
+  .edit-sidebar-item:hover {
+    background-color: rgb(233, 233, 252);
+    border-radius: 10px;
+  }
+}
+
+// --------------------------------------------------------------------
+
+   form {
+    flex: 13;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: small;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    flex: 3;
+    margin-right: 10px;
+    // text-align: right;
+    font-weight: bold;
+    color: #333;
+    font-size: 12px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="date"], 
+  input[type="select"], 
+  input[type="file"], 
+  select,
+  textarea,
+  input[type="number"] {
+    flex: 7;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: small;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="file"] {
+    background-color: white;
+  }
+  
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus, 
+    input[type="file"]:focus, 
+    select:focus,
+    textarea:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+  
+  input[type="submit"] {
+    flex: 1;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: small;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  // --------------------------------------------------------------
+
+  .inputs-buttons-container {
+    flex: 7; 
+    display: flex;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  
+    .inputs-container{
+      flex: 6;
+      display: flex; 
+      flex-direction: column; 
+    }
+    
+    input {
+      margin-bottom: 5px;
+    }
+    
+    .buttons-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content:  flex-start;/* Alignement horizontal à droite */
+      align-items: flex-end;
+    }
+  
+  
+    .ajouter-button {
+      display: flex;
+      align-items: center; 
+      justify-content: center;
+      color: #fff;
+      background-color: #007bff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 2px 10px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+    
+    .ajouter-button:hover {
+      background-color: #0056b3;
+    }
+    
+    .supprimer-button {
+      display: flex;
+      align-items: center; 
+      justify-content: center;
+      background-color: #dc3545;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center;
+      margin: 2px 10px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+    
+    .supprimer-button:hover {
+      background-color: #a82330;
+    }
+  
+  }
+
+  // --------------------------------
+  .files-container {
+    // background: red;
+    flex: 7;
+    display: flex;
+    justify-content: space-between;
+
+    a{
+     margin: 0 20px 0 -5px;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: small;
+      transition: border-color 0.2s ease;
+      transition: background-color 0.2s;
+      background-color: #e9e9e9;
+      color: black;
+    }
+    a:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    a:hover {
+      background-color: #e4e2e2;
+    }
+  }
+
+}
+
+

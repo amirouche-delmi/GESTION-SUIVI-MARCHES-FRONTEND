@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import userReducer from './userReducer';
+import allUserReducer from './allUserReducer';
 import marcheReducer from './marcheReducer';
 import allMarcheReducer from './allMarcheReducer';
 import besoinReducer from './besoinReducer';
@@ -13,6 +14,7 @@ import soumissionnaireReducer from './soumissionnaireReducer';
 
 export default combineReducers({
   userReducer,
+  allUserReducer,
   marcheReducer,
   allMarcheReducer,
   besoinReducer,

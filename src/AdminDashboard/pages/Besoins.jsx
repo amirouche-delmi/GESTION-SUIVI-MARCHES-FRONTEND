@@ -146,7 +146,7 @@ export default function Besoins() {
           </p>
         </div> :
         <DataGrid
-          rows={data.filter(item => item.dmID === userData._id)}
+          rows={data}
           disableSelectionOnClick
           columns={columns}
           pageSize={8}

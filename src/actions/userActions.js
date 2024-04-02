@@ -45,10 +45,10 @@ export const deleteUser = (id) => {
             method: 'delete',
             url: `${process.env.REACT_APP_API_URL}/api/user/` + id,
         })
-            .then((res) => {
-                dispatch({ type: DELETE_USER, payload: { id } })
-            })
-            .catch((err) => console.log(err))
+        .then((res) => {
+            dispatch({ type: DELETE_USER, payload: { id } })
+        })
+        .catch((err) => console.log(err))
     }
 }
 

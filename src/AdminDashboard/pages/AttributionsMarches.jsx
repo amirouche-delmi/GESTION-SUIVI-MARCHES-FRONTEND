@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 export default function AttributionsMarches() {
   const [data, setData] = useState([])
-  const userData = useSelector((state) => state.userReducer);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -98,7 +97,7 @@ export default function AttributionsMarches() {
           </p>
         </div> :
         <DataGrid
-          rows={data.filter(item => item.dmID === userData._id)}
+          rows={data}
           disableSelectionOnClick
           columns={columns}
           pageSize={8}

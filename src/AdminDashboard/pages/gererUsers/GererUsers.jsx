@@ -1,24 +1,14 @@
 import "./GererUsers.scss";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMarche, getAllMarche, resetMarcheReducer } from "../../../actions/marcheActions";
 import { formatDate, isEmpty } from "../../../utils/utils";
-import { LinearProgress } from '@mui/material';
-import { UidContext } from "../../../contexts/AppContext";
 import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
-import { Visibility } from "@material-ui/icons";
-import { resetBesoinReducer } from "../../../actions/besoinActions";
-import { resetValidationPrealableReducer } from "../../../actions/validationPrealableActions";
-import { resetCahierDesChargesReducer } from "../../../actions/cahierDesChargesActions";
-import { resetAppelDOffreReducer } from "../../../actions/appelDOffreActions";
-import { resetSoumissionnaireReducer } from "../../../actions/soumissionnaireActions";
 import axios from "axios";
-import { getAllUser, updateUser } from "../../../actions/userActions";
+import { deleteUser, getAllUser, getUser } from "../../../actions/userActions";
 
 export default function GererUsers() {
   const dispatch = useDispatch()
@@ -34,11 +24,11 @@ export default function GererUsers() {
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Voulez-vous vraiment supprimer ce marché ?',
+      title: 'Voulez-vous vraiment supprimer cet utilisateur ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -47,8 +37,8 @@ export default function GererUsers() {
       cancelButtonText: 'Annuler',
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteMarche(id));
-        toast.success("Le marché a été supprimé avec succès.", {
+        dispatch(deleteUser(id));
+        toast.success("L'utilisateur a été supprimé avec succès.", {
           duration: 6000,
           position: "bottom-right"
         });
@@ -111,7 +101,7 @@ export default function GererUsers() {
     {
       field: "email",
       headerName: "Email",
-      width: 155,
+      width: 140,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -159,14 +149,14 @@ export default function GererUsers() {
     {
       field: "action",
       headerName: "Action",
-      width: 130,
+      width: 140,
       renderCell: (params) => {
         return (
           <>
             {params.row.valide ? (
               <button className="compteValide" onClick={() => valide(params.row._id)}>Valide</button>
             ) : (
-              <button className="compteNonValide" onClick={() => nonValide(params.row._id)}>Non-Valide</button>
+              <button className="compteNonValide" onClick={() => nonValide(params.row._id)}>Invalide</button>
             )}
             <DeleteOutline
               className="productListDelete"

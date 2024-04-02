@@ -2,12 +2,11 @@ import "./GererMarches.scss";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteMarche, getAllMarche, resetMarcheReducer } from "../../../actions/marcheActions";
 import { formatDate, isEmpty } from "../../../utils/utils";
 import { LinearProgress } from '@mui/material';
-import { UidContext } from "../../../contexts/AppContext";
 import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
@@ -16,16 +15,17 @@ import { resetBesoinReducer } from "../../../actions/besoinActions";
 import { resetValidationPrealableReducer } from "../../../actions/validationPrealableActions";
 import { resetCahierDesChargesReducer } from "../../../actions/cahierDesChargesActions";
 import { resetAppelDOffreReducer } from "../../../actions/appelDOffreActions";
-import { resetSoumissionnaireReducer } from "../../../actions/soumissionnaireActions";
+import { getAllUser } from "../../../actions/userActions";
 
 export default function GererMarches() {
-  const uid = useContext(UidContext)
   const dispatch = useDispatch();
   const allMarcheData = useSelector((state) => state.allMarcheReducer);
+  const allUserData = useSelector((state) => state.allUserReducer);
   
   useEffect(() => {    
     const fetchData = async () => {
       try {
+        await dispatch(getAllUser());        
         await dispatch(getAllMarche());        
         await dispatch(resetMarcheReducer());
         await dispatch(resetBesoinReducer());
@@ -73,6 +73,20 @@ export default function GererMarches() {
       },
     },
     {
+      field: "DM",
+      headerName: "DM",
+      width: 215,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+              {
+              allUserData.find(u => u._id === params.row.dmID).nom || "---"
+            }
+          </div>
+        );
+      },
+    },
+    {
       field: "marche",
       headerName: "Marché",
       width: 155,
@@ -112,6 +126,27 @@ export default function GererMarches() {
       },
     },
     {
+      field: "action",
+      headerName: "Action",
+      width: 145,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/consulter-marche/" + params.row._id}>
+              <button className="consulterButton">
+                <Visibility className="consulterIcon" />
+                Consulter
+              </button>
+            </Link>
+            <DeleteOutline
+              className="productListDelete"
+              onClick={() => handleDelete(params.row._id)}
+            />
+          </>
+        );
+      },
+    },
+    {
       field: "updatedAt",
       headerName: "Mis à jour le",
       width: 150,
@@ -123,35 +158,21 @@ export default function GererMarches() {
         );
       },
     },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 205,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/consulter-marche/" + params.row._id}>
-              <button className="consulterButton">
-                <Visibility className="consulterIcon" />
-                Consulter
-              </button>
-            </Link>
-            <Link to={"/editer-marche/" + params.row._id}>
-              <button className="productListEdit">Éditer</button>
-            </Link>
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
-          </>
-        );
-      },
-    },
   ];
   
   return (
     <div className="productList">
-      {(isEmpty(allMarcheData[0])) ? 
+      {(!isEmpty(allMarcheData[0]) && !isEmpty(allUserData[0])) ? 
+        <DataGrid
+          rows={allMarcheData}
+          disableSelectionOnClick
+          columns={columns}
+          pageSize={8}
+          checkboxSelection
+          getRowId={(row) => row['_id']}
+          className="data-grid"
+        /> 
+      :
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
           <p style={{ 
             textAlign: "center", 
@@ -160,16 +181,7 @@ export default function GererMarches() {
           }}>
             Chargement...
           </p>
-        </div> :
-        <DataGrid
-          rows={allMarcheData.filter(item => item.dmID === uid)}
-          disableSelectionOnClick
-          columns={columns}
-          pageSize={8}
-          checkboxSelection
-          getRowId={(row) => row['_id']}
-          className="data-grid"
-        />
+        </div>
       }
     </div>
   )

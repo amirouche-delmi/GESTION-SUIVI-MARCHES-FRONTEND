@@ -54,7 +54,7 @@ const SignUpForm = () => {
             setControlPassword("");
             setRole("");
             document.getElementById('DM').checked = false;
-            document.getElementById('CCM').checked = false;
+            document.getElementById('CEO').checked = false;
             nomError.innerHTML="";
             emailError.innerHTML="";
             passwordError.innerHTML = "";
@@ -143,13 +143,13 @@ const SignUpForm = () => {
               />
             </div>
             <div className="role-item">
-              <label htmlFor="CCM">CCM</label>
+              <label htmlFor="CEO">CEO</label>
               <input
                 type="radio"
                 name="role"
-                id="CCM"
+                id="CEO"
                 required
-                value="CCM"
+                value="CEO"
                 onChange={(e) => {
                   setRole(e.target.value);
                 }}

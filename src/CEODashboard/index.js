@@ -9,14 +9,12 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
-import Logout from "../components/log/Logout";
 
-const AdminDashboard = () => {
+const CEODashboard = () => {
 
   return (
     <Router>
       <Topbar />
-      <Logout />
       <div className="container">
         <Sidebar />
         <Routes>
@@ -34,4 +32,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default CEODashboard;

@@ -9,7 +9,7 @@ import Loading from './pages/Loading/Loading';
 import { getUser } from "./actions/userActions";
 import DMDashboard from './DMDashboard';
 import AdminDashboard from './AdminDashboard';
-import CCMDashboard from './CCMDashboard';
+import CEODashboard from './CEODashboard';
 
 function App() {
   const [uid, setUid] = useState(null);
@@ -53,12 +53,11 @@ function App() {
         </Router>
       ) : (userData.role === 'Admin' ? (            
         <AdminDashboard />              
+      ) : (userData.role === 'DM' ? (
+        <DMDashboard />      
       ) : (
-        <DMDashboard />
-      )))}       
-      {/* ) : (
-        <CCMDashboard />
-      )))}        */}
+        <CEODashboard />
+      ))))}       
     </UidContext.Provider>    
   );
 }

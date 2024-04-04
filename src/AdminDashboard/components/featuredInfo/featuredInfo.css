@@ -4,8 +4,11 @@
   justify-content: space-between;
 }
 
-.featuredItem {
-  flex: 1;
+/* ------------------------------------- */
+
+.featuredItemMarche {
+  /* flex: 3; */
+  width: 30%;
   margin: 0px 20px;
   padding: 30px;
   border-radius: 10px;
@@ -14,6 +17,27 @@
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
+.pie-chart {
+    width: 40%;
+    padding: 0 30px ;
+    padding-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.featuredItemContrat {
+    width: 25%;
+    margin: 0px 20px;
+    padding: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  }
+
+/* ------------------------------------- */
 .featuredTitle{
     font-size: 20px;
 }

@@ -3,15 +3,12 @@ import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import TimelineIcon from '@mui/icons-material/Timeline';
 import axios from "axios";
-import { useSelector } from "react-redux";
-import PercentIcon from '@mui/icons-material/Percent';
+import * as React from 'react';
+import { PieChart } from '@mui/x-charts/PieChart';
 
-export default function FeaturedInfo() {
-
-  const userData = useSelector((state) => state.userReducer);
-  const [marches, setMarches] = useState([])
-  const [appelDOffres, setAppelDOffres] = useState([])
-  const [offres, setOffres] = useState([])
+export default function FeaturedInfo() { 
+  const [marches, setMarches] = useState([]);
+  const [allUserData, setAllUserData] = useState([]);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -19,11 +16,9 @@ export default function FeaturedInfo() {
         let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/marche`);
         setMarches(response.data);
 
-        response = await axios.get(`${process.env.REACT_APP_API_URL}/api/appel-d-offre`);
-        setAppelDOffres(response.data);
-        
-        response = await axios.get(`${process.env.REACT_APP_API_URL}/api/offre`);
-        setOffres(response.data);
+        response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user`);
+        setAllUserData(response.data);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -32,36 +27,88 @@ export default function FeaturedInfo() {
     fetchData();
   }, []);
 
+  const differenceNombreMarchesAnnee = (marches) => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const previousYear = currentYear - 1;
+
+    const marchesAnneeCourante = marches.filter(marche => new Date(marche.createdAt).getFullYear() === currentYear);
+    const nombreMarchesAnneeCourante = marchesAnneeCourante.length;
+
+    const marchesAnneePrecedente = marches.filter(marche => new Date(marche.createdAt).getFullYear() === previousYear);
+    const nombreMarchesAnneePrecedente = marchesAnneePrecedente.length;
+
+    const difference = nombreMarchesAnneeCourante - nombreMarchesAnneePrecedente;
+
+    return difference;
+  }
+
+  const marchesParDmID = marches.reduce((acc, marche) => {
+    const { dmID } = marche;
+    acc[dmID] = (acc[dmID] || 0) + 1;
+    return acc;
+  }, {});
+
+  const data = Object.entries(marchesParDmID).map(([dmID, count]) => ({
+    id: dmID,
+    value: count,
+    label: `${allUserData.find(user => user._id === dmID)?.nom || 'Inconnu'}`,
+  }));
+
   return (
     <div className="featured">
-      <div className="featuredItem">
-        <span className="featuredTitle">Marchés</span>
+      <div className="featuredItemMarche">
+        <div style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', bottom: 0, right: 0, textAlign: 'right' }}>
+            Total : {marches.length}
+          </div>
+        </div>
+        <span className="featuredTitle">Marchés</span> 
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">
-            {marches.filter(item => item.dmID === userData._id).length} / {marches.length}</span>
+            {new Date().getFullYear()} : {marches.filter(marche => new Date(marche.createdAt).getFullYear() === new Date().getFullYear()).length}
+          </span>         
           <span className="featuredMoneyRate">
-          {(marches.filter(item => item.dmID === userData._id).length / marches.length * 100).toFixed(2)} <PercentIcon  className="featuredIcon negative"/>
-          </span>
-        </div>
-        <span className="featuredSub">Pourcentage des marchés créés</span>
-      </div>
-      <div className="featuredItem">
-        <span className="featuredTitle">Offres</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">{offres.filter(item => item.dmID === userData._id).length} / {appelDOffres.filter(item => item.dmID === userData._id).length}</span>
-          <span className="featuredMoneyRate">
-            {(offres.filter(item => item.dmID === userData._id).length / (appelDOffres.filter(item => item.dmID === userData._id).length  || 1)).toFixed(2)}
+            {(differenceNombreMarchesAnnee(marches) >= 0 ? '+' : '-') + Math.abs(differenceNombreMarchesAnnee(marches))}
             {
-              (offres.filter(item => item.dmID === userData._id).length / (appelDOffres.filter(item => item.dmID === userData._id).length || 1)).toFixed(2) >= 3 ?
-                <ArrowUpward className="featuredIcon"/>
-              :
-                <ArrowDownward className="featuredIcon negative"/>
+              differenceNombreMarchesAnnee(marches) >= 0 ? 
+              <ArrowUpward className="featuredIcon"/> :
+              <ArrowDownward className="featuredIcon negative"/>
             } 
           </span>
         </div>
-        <span className="featuredSub">Moyenne offres par appel d'offre</span>
+        <span className="featuredSub">Par rapport à l'année dernière</span>
       </div>
-      <div className="featuredItem">
+
+      <div className="pie-chart">
+        <PieChart 
+          series={[
+            {
+              data,
+              innerRadius: 30,
+              outerRadius: 65,
+              paddingAngle: 5,
+              cornerRadius: 5,
+              cx: 60,
+            },
+          ]}
+          slotProps={{
+            legend: {
+              direction: 'column',
+              position: { vertical: 'middle', horizontal: 'right' },
+              padding: 0,
+              hidden: false,
+              labelStyle: {
+                fontSize: 8,
+                fill: '#007bff',
+              },
+              itemMarkHeight: 8,
+            },
+          }}
+        />
+      </div>
+
+      <div className="featuredItemContrat">
         <span className="featuredTitle">Contrats</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">$2,225</span>

@@ -1,6 +1,7 @@
-.productList {
+.gerer-users-container {
     margin: 0px 20px 10px 275px;
     transform: translateX(-255px);
+    flex: 6;
     
     h2 {
         font-size: 22px;
@@ -9,7 +10,6 @@
     }
     
     .data-grid {
-        flex: 6;
         -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
         box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
         width: calc(100% + 255px);    
@@ -93,6 +93,24 @@
     .consulterIcon{
         font-size: 16px !important;
         margin-right: 5px;
+    }
+
+    // ---------------------------------------------------------------------
+    .MuiDataGrid-row:hover {
+        background-color: initial !important;
+        color: initial !important;
+    }
+
+    .row-class {
+        background-color: #fcfffc;
+    }  
+      
+    .MuiDataGrid-row.row-class:hover {
+        background-color: #f0fff0 !important;
+    }
+
+    .MuiDataGrid-columnHeader {
+        background-color: #fef8f8; 
     }
 }
 

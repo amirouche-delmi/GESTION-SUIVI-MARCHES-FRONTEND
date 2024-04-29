@@ -16,7 +16,9 @@ import { resetBesoinReducer } from "../../../actions/besoinActions";
 import { resetValidationPrealableReducer } from "../../../actions/validationPrealableActions";
 import { resetCahierDesChargesReducer } from "../../../actions/cahierDesChargesActions";
 import { resetAppelDOffreReducer } from "../../../actions/appelDOffreActions";
-import { resetSoumissionnaireReducer } from "../../../actions/soumissionnaireActions";
+import { resetContratReducer } from "../../../actions/contratActions";
+import LoadingComponent from "../../../pages/Loading/LoadingComponent";
+import { resetAttributionMarcheReducer } from "../../../actions/attributionMarcheActions";
 
 export default function GererMarches() {
   const uid = useContext(UidContext)
@@ -32,8 +34,10 @@ export default function GererMarches() {
         await dispatch(resetValidationPrealableReducer());
         await dispatch(resetCahierDesChargesReducer());
         await dispatch(resetAppelDOffreReducer());
+        await dispatch(resetAttributionMarcheReducer());
+        await dispatch(resetContratReducer());
       } catch (error) {
-        console.error("Une erreur s'est produite lors de la récupération des données du marché :", error);
+        console.error("Une erreur s'est produite :", error);
       }
     };    
     fetchData();
@@ -75,10 +79,10 @@ export default function GererMarches() {
     {
       field: "marche",
       headerName: "Marché",
-      width: 155,
+      width: 160,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
+          <div className="productListItem" title={params.row.intitule}>
               {params.row.intitule}
           </div>
         );
@@ -126,7 +130,7 @@ export default function GererMarches() {
     {
       field: "action",
       headerName: "Action",
-      width: 205,
+      width: 208,
       renderCell: (params) => {
         return (
           <>
@@ -150,17 +154,10 @@ export default function GererMarches() {
   ];
   
   return (
-    <div className="productList">
-      {(isEmpty(allMarcheData[0])) ? 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-          <p style={{ 
-            textAlign: "center", 
-            fontSize: "1.1rem",
-            lineHeight: "1.5", 
-          }}>
-            Chargement...
-          </p>
-        </div> :
+    isEmpty(allMarcheData[0]) ? (
+      <LoadingComponent />
+    ) : (
+      <div className="gerer-marche-dm-container">
         <DataGrid
           rows={allMarcheData.filter(item => item.dmID === uid)}
           disableSelectionOnClick
@@ -169,8 +166,10 @@ export default function GererMarches() {
           checkboxSelection
           getRowId={(row) => row['_id']}
           className="data-grid"
+          getRowClassName={(params) => 'row-class'}
         />
-      }
-    </div>
-  )
+      </div>
+    )
+  );
+   
 }

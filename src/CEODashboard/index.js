@@ -1,14 +1,19 @@
+import './index.css'
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
-import "./index.css";
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import UserList from "./pages/userList/UserList";
-import User from "./pages/user/User";
-import NewUser from "./pages/newUser/NewUser";
-import ProductList from "./pages/productList/ProductList";
-import Product from "./pages/product/Product";
-import NewProduct from "./pages/newProduct/NewProduct";
+import Profil from "./pages/profil/Profil";
+import EvaluerOffres from "./pages/evaluerOffres/EvaluerOffres";
+import EvaluationOffres from "./pages/evaluationOffres/EvaluationOffres";
+import EvaluerOffre from "./pages/evaluerOffre/EvaluerOffre";
+import AttribuerMarches from "./pages/attribuerMarches/AttribuerMarches";
+import AttributionMarche from "./pages/attributionMarche/AttributionMarche";
+import ConsulterMarche from "./pages/consulterMarche/ConsulterMarche";
+import Email from "./pages/email/Email";
+import Messages from "./pages/messages/Messages";
+import AttribuerMarche from './pages/attribuerMarche/AttribuerMarche';
+import Marches from './pages/Marches/Marches';
 
 const CEODashboard = () => {
 
@@ -19,12 +24,21 @@ const CEODashboard = () => {
         <Sidebar />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/user/:userId" element={<User />} />
-          <Route path="/newUser"  element={<NewUser />} />
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/product/:productId" element={<Product />} />
-          <Route path="/newproduct" element={<NewProduct />} />
+          <Route path="/profil" element={<Profil />} />
+
+          <Route path="/evaluer-offres" element={<EvaluerOffres />} />
+          <Route path="/evaluation-offres/:marcheID" element={<EvaluationOffres />} />
+          <Route path="/evaluer-offre/:offreID" element={<EvaluerOffre />} />
+
+          <Route path="/attribuer-marches" element={<AttribuerMarches />} />
+          <Route path="/attribution-marche/:marcheID" element={<AttributionMarche />} />
+          <Route path="/attribuer-marche/:offreID" element={<AttribuerMarche />} />
+
+          <Route path="/marches" element={<Marches />} />
+          <Route path="/consulter-marche/:marcheID" element={<ConsulterMarche />} />
+
+          <Route path="/email" element={<Email />} />
+          <Route path="/Messages" element={<Messages />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

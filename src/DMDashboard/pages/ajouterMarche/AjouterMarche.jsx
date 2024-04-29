@@ -1,3 +1,4 @@
+import "./AjouterMarche.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,6 @@ import AjouterCahierDesChargesForm from "./Forms/AjouterCahierDesChargesForm";
 import AjouterAppelDOffreForm from "./Forms/AjouterAppelDOffreForm";
 import AjouterOffreForm from "./Forms/AjouterOffreForm";
 import { toast } from "react-hot-toast";
-import "./AjouterMarche.scss";
 
 export default function AjouterMarche() {
 
@@ -81,14 +81,21 @@ export default function AjouterMarche() {
         </div>
         <div className="step-item">
           <div className="step-text">Évaluation Offres</div>
-          <div className="step-color"></div>
+          <div className={"step-color" + (marcheData.etape === 6 ? " active-step" : (marcheData.etape > 6 ? " completed-step" : ""))}></div>
         </div>
         <div className="step-item">
           <div className="step-text">Attribution Marché</div>
+          <div className={"step-color" + (marcheData.etape === 7 ? " active-step" : (marcheData.etape > 7 ? " completed-step" : ""))}></div>
           <div className="step-color"></div>
         </div>
         <div className="step-item">
           <div className="step-text">Contrat</div>
+          <div className={"step-color" + (marcheData.etape === 8 ? " active-step" : (marcheData.etape > 8 ? " completed-step" : ""))}></div>
+          <div className="step-color"></div>
+        </div>
+        <div className="step-item">
+          <div className="step-text">Clôturé</div>
+          <div className={"step-color" + (marcheData.etape === 9 ? " active-step" : (marcheData.etape > 9 ? " completed-step" : ""))}></div>
           <div className="step-color"></div>
         </div>
       </div>
@@ -101,8 +108,18 @@ export default function AjouterMarche() {
         <AjouterCahierDesChargesForm />
       ) : marcheData.etape === 4 ? (
         <AjouterAppelDOffreForm />
-      ) : ((marcheData.etape === 5) || (marcheData.etape === 6)) ? (
+      ) : (marcheData.etape === 5) ? (
         <AjouterOffreForm />
+      ) : (marcheData.etape === 6) ? (
+          <div className="evaluation-offres-container">
+          <p>
+            La Commission d'Evaluation des Offres (CEO) sera chargée d'examiner attentivement 
+            toutes les offres soumises pour ce marché, de les évaluer selon des critères 
+            prédéfinis tels que le prix, la qualité et la conformité aux spécifications, 
+            puis de sélectionner le fournisseur le plus qualifié et compétitif pour 
+            attribuer le marché.
+          </p>
+        </div>
       ) : (
         <form onSubmit={handleRegister} className="ajouter-marche-form">
             <div className="form-item">

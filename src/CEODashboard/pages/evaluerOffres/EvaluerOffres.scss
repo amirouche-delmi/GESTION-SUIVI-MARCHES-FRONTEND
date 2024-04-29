@@ -1,0 +1,120 @@
+.evaluer-offres-container {
+    margin: 0px 20px 10px 275px;
+    transform: translateX(-255px);
+    flex: 6;
+    
+    .data-grid {
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        width: calc(100% + 255px);    
+        overflow: hidden;
+        overflow-x: auto;
+    }
+    .data-grid ::-webkit-scrollbar {
+        display: none;
+    }
+    .data-grid ::-moz-scrollbar {
+        display: none;
+    }
+    .data-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .data-grid::-moz-scrollbar {
+        display: none;
+    }
+
+    .productListItem {
+        display: flex; 
+        align-items: center; 
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overflow-x: auto;
+    }
+    
+    .productListItem::-webkit-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+    .productListItem::-moz-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+      
+    .linearProgressContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 25px;
+        background-color: #ebf1fe;
+        color: #2a7ade;
+        border-radius: 5px;
+    }
+    
+    .linearProgress {
+        width: 70%;
+        height: 10px;
+    }
+      
+    
+    .productListEdit{
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        background-color: #3bb077;
+        color: white;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    
+    .productListDelete{
+        color: red;
+        cursor: pointer;
+    }
+
+    .consulterButton{
+        display: flex;
+        align-items: center;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        background-color: #ebf1fe;
+        color: #2a7ade;
+        cursor: pointer;
+        margin-right: 10px;
+
+    }
+    
+    .consulterIcon{
+        font-size: 16px !important;
+        margin-right: 5px;
+    }
+
+    // ---------------------------------------------------------------------
+    .MuiDataGrid-row:hover {
+        background-color: initial !important;
+        color: initial !important;
+    }
+
+    .row-class {
+        background-color: #fcfffc;
+    }  
+      
+    .MuiDataGrid-row.row-class:hover {
+        background-color: #f0fff0 !important;
+    }
+
+    .MuiDataGrid-columnHeader {
+        background-color: #fef8f8; 
+    }
+}
+
+
+
+
+
+
+
+
+

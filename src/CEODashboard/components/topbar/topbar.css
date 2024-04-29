@@ -15,11 +15,22 @@
   justify-content: space-between;
 }
 
-.logo {
+.logo-img {
+  width:30px; 
+  height: auto;
+  margin-right: 15px;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logo-text {
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
   color: darkblue;
   cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .topRight{
@@ -48,10 +59,50 @@
     justify-content: center;
     font-size: 10px;
 }
+.topIconBadgeLast{
+  width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -3px;
+    left: 12px;
+    /* background-color: red; */
+    /* color: white; */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5px;
+}
 
 .topAvatar{
     width: 40px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.logout {
+  position: relative;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 5px;
+  bottom: -2px;
+}
+
+.text-hover {
+  display: none; 
+  position: absolute; 
+  bottom: -20px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  background-color: rgb(240, 240, 255);
+  padding: 5px; 
+  border-radius: 5px; 
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out;
+}
+
+.logout:hover .text-hover {
+  display: block;
+  opacity: 1;
 }

@@ -1,0 +1,85 @@
+.widgetSm {
+    flex: 1;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+  
+    .widgetLgTitle {
+      font-size: 22px;
+      font-weight: 600;
+    }
+  
+    .widgetLgContent {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 10px;
+    }
+  
+    .widgetLgItem {
+      display: flex;
+      align-items: center;
+    }
+  
+    .widgetLgItemTitle {
+      font-weight: bold;
+      width: 50%;
+      text-align: left;
+    }
+  
+    .widgetLgItemValue {
+      width: 50%;
+      display: flex;
+      align-items: center;
+    }
+  
+    .widgetLgButton {
+      display: flex;
+      align-items: center;
+      border: none;
+      border-radius: 10px;
+      padding: 5px 10px;
+      background-color: #e9fff4;
+      color: #3bb077;
+      cursor: pointer;
+    }
+  
+    .widgetLgIcon {
+      font-size: 16px !important;
+      margin-right: 5px;
+    }
+  
+    .widgetLgDeleteIcon {
+      color: red;
+      cursor: pointer;
+    }
+  
+    .actions{
+      padding-left: 20px;
+    }
+
+    .compteValide{
+      border: none;
+      border-radius: 10px;
+      padding: 5px 10px;
+      background-color: #3bb077;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+      width: 90px;
+      height: 28px;
+    }
+  
+  .compteNonValide{
+  border: none;
+  border-radius: 10px;
+  padding: 5px 5px;
+  background-color: #F05454;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  width: 90px;
+  height: 28px;
+  }
+}
+  

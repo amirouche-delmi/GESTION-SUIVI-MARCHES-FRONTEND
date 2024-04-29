@@ -4,6 +4,7 @@ export const GET_OFFRE = "GET_OFFRE";
 export const RESET_OFFRE_REDUCER = "RESET_OFFRE_REDUCER";
 export const UPDATE_OFFRE = "UPDATE_OFFRE";
 export const GET_ALL_OFFRE = "GET_ALL_OFFRE";
+export const RESET_ALL_OFFRE_REDUCER = "RESET_ALL_OFFRE_REDUCER";
 export const DELETE_OFFRE = "DELETE_OFFRE";
 
 export const getOffre = (id) => {
@@ -24,6 +25,12 @@ export const resetOffreReducer = () => {
   };
 };
 
+export const resetAllOffreReducer = () => {
+  return {
+    type: RESET_ALL_OFFRE_REDUCER
+  };
+};
+
 export const updateOffre = (id, info) => {
   return (dispatch) => {
       return axios({
@@ -31,10 +38,14 @@ export const updateOffre = (id, info) => {
           url: `${process.env.REACT_APP_API_URL}/api/offre/${id}`,
           data: { 
             detailsProposition: info.detailsProposition,
+            noteConformite: info.noteConformite, 
+            noteCout: info.noteCout, 
+            noteExperience: info.noteExperience, 
+            noteInnovation: info.noteInnovation,
             noteObtenue: info.noteObtenue,
+            membresCommission: info.membresCommission,
             resultatEvaluation: info.resultatEvaluation,
             motif: info.motif,
-            membresCommission: info.membresCommission,
           }
       }).then((res) => {
           dispatch({ type: UPDATE_OFFRE, payload: info })

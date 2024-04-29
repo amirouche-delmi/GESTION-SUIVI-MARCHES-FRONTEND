@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UidContext } from './contexts/AppContext';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
-import Loading from './pages/Loading/Loading';
+import LoadingPage from './pages/Loading/LoadingPage';
 import { getUser } from "./actions/userActions";
 import DMDashboard from './DMDashboard';
 import AdminDashboard from './AdminDashboard';
@@ -41,7 +41,7 @@ function App() {
       {uid == null ? (
         <Router>
           <Routes>
-            <Route path="/" element={<Loading />} />
+            <Route path="/" element={<LoadingPage />} />
           </Routes>
         </Router>
       ) : ( uid == false ? (

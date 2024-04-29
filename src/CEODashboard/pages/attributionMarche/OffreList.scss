@@ -1,0 +1,194 @@
+.offre-list-attribution {
+    margin-left: 255px;
+    margin-top: 25px;
+    transform: translateX(-255px);
+    
+    .data-grid {
+        flex: 6;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        width: calc(100% + 255px);    
+        overflow: hidden;
+        overflow-x: auto;
+        // min-height: 65vh;
+    }
+    .data-grid ::-webkit-scrollbar {
+        display: none;
+    }
+    .data-grid ::-moz-scrollbar {
+        display: none;
+    }
+    .data-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .data-grid::-moz-scrollbar {
+        display: none;
+    }
+
+    .productListItem {
+        display: flex; 
+        align-items: center; 
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overflow-x: auto;
+    }
+    
+    .productListItem::-webkit-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+    .productListItem::-moz-scrollbar {
+        z-index: -1; 
+        height: 0px;
+    }
+      
+    .linearProgressContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 20px;
+        border: 1px solid rgb(12, 106, 248);
+    }
+    
+    .linearProgress {
+        width: 70%;
+        height: 10px;
+    }
+      
+    
+    .productListEdit{
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        background-color: #3bb077;
+        color: white;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    
+    .productListDelete{
+        color: red;
+        cursor: pointer;
+    }
+
+    .Accepte {
+        color: rgb(7, 203, 7);
+        font-weight: bold;
+    }
+
+    .Rejete{
+        color: red;
+        font-weight: bold;
+    }
+
+    .updated-offre {
+        background-color: #edffed; 
+    }    
+    .not-updated-offre {
+        background-color: #fef3f3; 
+    }   
+
+    .MuiDataGrid-row:hover {
+        background-color: initial !important;
+        color: initial !important;
+    }
+      
+    .MuiDataGrid-row.updated-offre:hover {
+        background-color: #dfffdf !important;
+    }
+      
+    .MuiDataGrid-row.not-updated-offre:hover {
+        background-color: #fee2e0 !important;
+    }
+
+    // ----------------------------------------------------
+  
+    form {
+        width: calc(100% + 255px); 
+    }
+
+    .submit-contrat-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .contrat-button {
+        display: inline-flex; 
+        align-items: center;
+        justify-content: center;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: small;
+        transition: background-color 0.3s ease;
+    }
+    
+    .contrat-button:hover {
+        background-color: #45a049; 
+    }
+    
+    .submit-button {
+        display: inline-flex; 
+        align-items: center;
+        justify-content: center;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: small;
+        transition: background-color 0.3s ease;
+        max-width: 110px;
+    }
+    
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+
+}
+
+.contrat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 13;
+    width: 100%;
+    height: 65vh;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: small;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    p {
+        text-align: center;
+        max-width: 600px;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        color: #333; 
+    }
+}  
+
+
+
+
+
+
+
+
+

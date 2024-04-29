@@ -16,6 +16,7 @@ import { resetValidationPrealableReducer } from "../../../actions/validationPrea
 import { resetCahierDesChargesReducer } from "../../../actions/cahierDesChargesActions";
 import { resetAppelDOffreReducer } from "../../../actions/appelDOffreActions";
 import { getAllUser } from "../../../actions/userActions";
+import LoadingComponent from "../../../pages/Loading/LoadingComponent";
 
 export default function GererMarches() {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ export default function GererMarches() {
     {
       field: "DM",
       headerName: "DM",
-      width: 215,
+      width: 210,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -89,10 +90,10 @@ export default function GererMarches() {
     {
       field: "marche",
       headerName: "Marché",
-      width: 155,
+      width: 165,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
+          <div className="productListItem" title={params.row.intitule}>
               {params.row.intitule}
           </div>
         );
@@ -161,8 +162,10 @@ export default function GererMarches() {
   ];
   
   return (
-    <div className="productList">
-      {(!isEmpty(allMarcheData[0]) && !isEmpty(allUserData[0])) ? 
+    (isEmpty(allMarcheData[0]) || isEmpty(allUserData[0])) ? (
+      <LoadingComponent />
+    ) : (
+      <div className="gerer-marche-container">
         <DataGrid
           rows={allMarcheData}
           disableSelectionOnClick
@@ -171,18 +174,9 @@ export default function GererMarches() {
           checkboxSelection
           getRowId={(row) => row['_id']}
           className="data-grid"
-        /> 
-      :
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-          <p style={{ 
-            textAlign: "center", 
-            fontSize: "1.1rem",
-            lineHeight: "1.5", 
-          }}>
-            Chargement...
-          </p>
-        </div>
-      }
-    </div>
+          getRowClassName={(params) => 'row-class'}
+        />
+      </div>
+    )      
   )
 }

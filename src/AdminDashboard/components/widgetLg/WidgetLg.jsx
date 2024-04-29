@@ -26,7 +26,7 @@ export default function WidgetLg() {
     const fetchData = async () => {
       try {
         let response = await axios.get(`${process.env.REACT_APP_API_URL}/api/marche`);
-        setMarches(response.data.filter(item => item.dmID === userData._id).slice(0, 5));
+        setMarches(response.data.slice(0, 5));
        
         await dispatch(resetMarcheReducer());
         await dispatch(resetBesoinReducer());

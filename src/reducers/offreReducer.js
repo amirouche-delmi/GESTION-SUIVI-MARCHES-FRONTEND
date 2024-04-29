@@ -16,10 +16,14 @@ import {
         return {
           ...state,
           detailsProposition: action.payload.detailsProposition,
+          noteConformite: action.payload.noteConformite, 
+          noteCout: action.payload.noteCout, 
+          noteExperience: action.payload.noteExperience, 
+          noteInnovation: action.payload.noteInnovation,
           noteObtenue: action.payload.noteObtenue,
+          membresCommission: action.payload.membresCommission,
           resultatEvaluation: action.payload.resultatEvaluation,
           motif: action.payload.motif,
-          membresCommission: action.payload.membresCommission,
         };  
       default:
         return state;

@@ -32,7 +32,8 @@ export const updateMarche = (id, info) => {
           url: `${process.env.REACT_APP_API_URL}/api/marche/${id}`,
           data: { 
             intitule: info.intitule,
-            description: info.description
+            description: info.description,
+            etape: info.etape,
           }
       }).then((res) => {
           dispatch({ type: UPDATE_MARCHE, payload: info })

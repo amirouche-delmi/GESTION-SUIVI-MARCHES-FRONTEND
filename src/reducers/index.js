@@ -11,6 +11,8 @@ import allOffreReducer from './allOffreReducer';
 import offreReducer from './offreReducer';
 import allSoumissionnaireReducer from './allSoumissionnaireReducer';
 import soumissionnaireReducer from './soumissionnaireReducer';
+import attributionMarcheReducer from './attributionMarcheReducer';
+import contratReducer from './contratReducer';
 
 export default combineReducers({
   userReducer,
@@ -25,4 +27,6 @@ export default combineReducers({
   offreReducer,
   allSoumissionnaireReducer,
   soumissionnaireReducer,
+  attributionMarcheReducer,
+  contratReducer,
 });

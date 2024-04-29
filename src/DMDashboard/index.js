@@ -1,3 +1,4 @@
+import './index.css'
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/home/Home";
@@ -8,14 +9,14 @@ import GererMarches from "./pages/gererMarches/GererMarches";
 import EditerMarche from "./pages/editerMarche/EditerMarche";
 import ConsulterMarche from "./pages/consulterMarche/ConsulterMarche";
 import EditerOffre from "./pages/editerOffre/EditerOffre";
-import Besoins from "./pages/Besoins";
-import ValidationsPrealables from "./pages/ValidationsPrealables";
-import CahiersDesCharges from "./pages/CahiersDesCharges";
-import AppelsDOffres from "./pages/AppelsDOffres";
-import Soumissionnaires from "./pages/Soumissionnaires";
-import Offres from "./pages/Offres";
-import AttributionsMarches from "./pages/AttributionsMarches";
-import Contrats from "./pages/Contrats";
+import Besoins from "./pages/tables/Besoins";
+import ValidationsPrealables from "./pages/tables/ValidationsPrealables";
+import CahiersDesCharges from "./pages/tables/CahiersDesCharges";
+import AppelsDOffres from "./pages/tables/AppelsDOffres";
+import Soumissionnaires from "./pages/tables/Soumissionnaires";
+import Offres from "./pages/tables/Offres";
+import AttributionsMarches from "./pages/tables/AttributionsMarches";
+import Contrats from "./pages/tables/Contrats";
 import Email from "./pages/email/Email";
 import Messages from "./pages/messages/Messages";
 

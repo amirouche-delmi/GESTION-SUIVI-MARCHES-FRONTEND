@@ -2,7 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { getMarche } from "../../../../actions/marcheActions";
+import { getMarche, updateMarche } from "../../../../actions/marcheActions";
+import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
+import { isEmpty } from "../../../../utils/utils";
+import { getAllOffre } from "../../../../actions/offreActions";
 
 export default function AjouterOffreForm() {
 
@@ -15,6 +19,8 @@ export default function AjouterOffreForm() {
   const [telephoneSoumissionnaire, setTelephoneSoumissionnaire] = useState('');
   const [statutSoumissionnaire, setStatutSoumissionnaire] = useState('');
   const [detailsProposition, setDetailsProposition] = useState('');
+
+  const [offreAjoute, setOffreAjoute] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -30,13 +36,14 @@ export default function AjouterOffreForm() {
       });
       
       await dispatch(getMarche(marcheData._id))
-
+      
       setNomSoumissionnaire("");
       setEmailSoumissionnaire("");
       setTelephoneSoumissionnaire("");
       setStatutSoumissionnaire("");
       setDetailsProposition(""); 
       document.getElementById("statutSoumissionnaire").selectedIndex = 0;
+      setOffreAjoute(true)
   
       toast.success("Enregistrement réussi.", {
         duration: 6000,
@@ -47,6 +54,27 @@ export default function AjouterOffreForm() {
       toast.error("Une erreur s'est produite lors de l'enregistrement ! un soumissionnaire ne peut que déposer un seul offre pour un marché !", {
           duration: 6000,
           position: "bottom-right"
+      });
+    }
+  }
+
+  const handelClick = async (e) => {
+    e.preventDefault();
+    if (offreAjoute) {
+      try {
+        await dispatch(updateMarche(marcheData._id, { etape: 6 }));
+      } catch (error) {
+        console.error(error);
+        toast.error("Une erreur s'est produite !", {
+            duration: 6000,
+            position: "bottom-right"
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Ajout des offres requise !",
+        text: "Il est nécessaire d'ajouter toutes les offres avant de passer à l'étape d'évaluation des offres.",
+        icon: "warning",
       });
     }
   }
@@ -107,7 +135,10 @@ export default function AjouterOffreForm() {
           value={detailsProposition}>
         </textarea>
       </div>        
-      <input type="submit" className="submit-button" value="Enregistrer" />
+      <div className="submit-evaluation-container">
+        <input type="submit" className="submit-button" value="Enregistrer" />    
+        <button className="evaluation-button" onClick={handelClick}>Évaluation Offres ➔</button>
+      </div>
     </form>
   );
 }

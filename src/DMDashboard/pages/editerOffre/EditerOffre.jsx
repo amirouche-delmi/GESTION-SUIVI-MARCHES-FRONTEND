@@ -1,8 +1,8 @@
+import "./EditerOffre.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import "./EditerOffre.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { isEmpty } from "../../../utils/utils";
 import { updateSoumissionnaire } from "../../../actions/soumissionnaireActions";
 import { updateOffre } from "../../../actions/offreActions";
@@ -36,13 +36,13 @@ export default function EditerOffre() {
       await dispatch(updateOffre(offreID, { detailsProposition }));
       await dispatch(updateSoumissionnaire(soumissionnaireData._id, { nomSoumissionnaire, emailSoumissionnaire, telephoneSoumissionnaire, statutSoumissionnaire }));
 
-      toast.success("offre mis à jour avec succès !", {
+      toast.success("Mise à jour réussie.", {
         duration: 6000,
         position: "bottom-right",
       });
     } catch (error) {
       console.error(error);
-      toast.error("Une erreur s'est produite lors de la mise à jour de l'offre !", {
+      toast.error("Une erreur s'est produite lors de la mise à jour !", {
         duration: 6000,
         position: "bottom-right",
       });
@@ -54,9 +54,8 @@ export default function EditerOffre() {
       <div className="editer-offre-container">
     {/* ------------------------------------------------------------ */}
         <h2>Éditer Offre</h2>
-    {/* ------------------------------------------------------------ */}
-           
-        <form action="" onSubmit={handleRegister} className="ajouter-validation-prealable-form">
+    {/* ------------------------------------------------------------ */}           
+        <form onSubmit={handleRegister}>
           <div className="form-item">
             <label htmlFor="nomSoumissionnaire">Nom Soumissionnaire :</label>
             <input type="text" id="nomSoumissionnaire" name="nomSoumissionnaire" required placeholder="Entrez nom soumissionnaire"
@@ -111,9 +110,11 @@ export default function EditerOffre() {
               value={detailsProposition}>
             </textarea>
           </div>  
-          <input type="submit" className="submit-button" value="Enregistrer" />    
+          <div className="submit-back-container">
+            <Link to="#" className="back-button" onClick={() => window.history.back()}>🡨 Tous les offres</Link>
+            <input type="submit" className="submit-button" value="Enregistrer" />    
+          </div>    
         </form>
-
       </div>
     )
   );

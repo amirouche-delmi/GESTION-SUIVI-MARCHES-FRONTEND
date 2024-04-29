@@ -8,11 +8,11 @@ import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
 import axios from "axios";
-import { deleteUser, getAllUser, getUser } from "../../../actions/userActions";
+import { deleteUser, getAllUser } from "../../../actions/userActions";
+import LoadingComponent from "../../../pages/Loading/LoadingComponent";
 
 export default function GererUsers() {
   const dispatch = useDispatch()
-  const userData = useSelector((state) => state.userReducer);
   const allUserData = useSelector((state) => state.allUserReducer);
   
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function GererUsers() {
     {
       field: "nom",
       headerName: "Nom",
-      width: 155,
+      width: 160,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -193,27 +193,21 @@ export default function GererUsers() {
   ];
   
   return (
-    <div className="productList">
-      {(isEmpty(allUserData[0])) ? 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-          <p style={{ 
-            textAlign: "center", 
-            fontSize: "1.1rem",
-            lineHeight: "1.5", 
-          }}>
-            Chargement...
-          </p>
-        </div> :
+    isEmpty(allUserData[0]) ? (
+      <LoadingComponent />
+    ) : (
+      <div className="gerer-users-container">
         <DataGrid
-          rows={allUserData.filter(item => item._id !== userData._id)}
+          rows={allUserData}
           disableSelectionOnClick
           columns={columns}
           pageSize={8}
           checkboxSelection
           getRowId={(row) => row['_id']}
           className="data-grid"
+          getRowClassName={(params) => 'row-class'}
         />
-      }
-    </div>
+      </div>
+    ) 
   )
 }

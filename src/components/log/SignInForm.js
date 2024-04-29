@@ -35,7 +35,6 @@ const SignInForm = () => {
           );
         }
       } else {
-        toast.loading('Chargement en cours...');
         window.location = "/";
       }
     })

@@ -17,6 +17,8 @@ import { resetCahierDesChargesReducer } from "../../../actions/cahierDesChargesA
 import { resetAppelDOffreReducer } from "../../../actions/appelDOffreActions";
 import { getAllUser } from "../../../actions/userActions";
 import LoadingComponent from "../../../pages/Loading/LoadingComponent";
+import { resetAttributionMarcheReducer } from "../../../actions/attributionMarcheActions";
+import { resetContratReducer } from "../../../actions/contratActions";
 
 export default function GererMarches() {
   const dispatch = useDispatch();
@@ -32,7 +34,9 @@ export default function GererMarches() {
         await dispatch(resetBesoinReducer());
         await dispatch(resetValidationPrealableReducer());
         await dispatch(resetCahierDesChargesReducer());
-        await dispatch(resetAppelDOffreReducer());
+        await dispatch(resetAppelDOffreReducer());        
+        await dispatch(resetAttributionMarcheReducer());
+        await dispatch(resetContratReducer());
       } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données du marché :", error);
       }

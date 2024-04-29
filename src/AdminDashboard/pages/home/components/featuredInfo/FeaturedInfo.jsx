@@ -1,14 +1,15 @@
+import "./featuredInfo.scss";
 import { useEffect, useState } from "react";
-import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import TimelineIcon from '@mui/icons-material/Timeline';
 import axios from "axios";
 import * as React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
+import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 
 export default function FeaturedInfo() { 
   const [marches, setMarches] = useState([]);
   const [allUserData, setAllUserData] = useState([]);
+  const [contrats, setContrats] = useState([])
   
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +19,9 @@ export default function FeaturedInfo() {
 
         response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user`);
         setAllUserData(response.data);
+
+        response = await axios.get(`${process.env.REACT_APP_API_URL}/api/contrat`);
+        setContrats(response.data);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -111,9 +115,12 @@ export default function FeaturedInfo() {
       <div className="featuredItemContrat">
         <span className="featuredTitle">Contrats</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">$2,225</span>
-          <span className="featuredMoneyRate">
-            +2.4 <TimelineIcon className="featuredIcon negative"/>
+          <span className="featured-contrat-money">
+            {isNaN(((contrats.reduce((acc, contract) => acc + contract.cout, 0)) / (contrats.length)).toFixed(2)) ?
+              0
+            :
+              ((contrats.reduce((acc, contract) => acc + contract.cout, 0)) / (contrats.length)).toFixed(2)
+            } DA
           </span>
         </div>
         <span className="featuredSub">Cout moyen des contrats</span>

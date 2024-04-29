@@ -1,7 +1,7 @@
+import "./ConsulterMarche.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMarche } from "../../../actions/marcheActions";
-import "./ConsulterMarche.scss";
 import { useParams } from "react-router-dom";
 import { dateParser, isEmpty } from "../../../utils/utils";
 import { getBesoin } from "../../../actions/besoinActions";
@@ -277,7 +277,7 @@ export default function ConsulterMarche() {
             </>         
           )}
           {/* ------------------------------------------------------------ */}
-          {!isEmpty(attributionMarcheData) && (
+          {!isEmpty(attributionMarcheData) && (marcheData.etape >= 8) && (
             <Accordion>
               <AccordionSummary className="accordion-summary" expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
                 <div className="accordion-title">Attribution Marché</div>

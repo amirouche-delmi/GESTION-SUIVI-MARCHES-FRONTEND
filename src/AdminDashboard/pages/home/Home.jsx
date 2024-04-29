@@ -1,17 +1,14 @@
-import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.scss";
-import WidgetLg from "../../components/widgetLg/WidgetLg";
-import { useSelector } from "react-redux";
+import FeaturedInfo from "./components/featuredInfo/FeaturedInfo";
+import WidgetLg from "./components/widgetLg/WidgetLg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
-import TimelineIcon from '@mui/icons-material/Timeline';
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
 
 export default function Home() {
-  const userData = useSelector((state) => state.userReducer);
   const [marches, setMarches] = useState([]);
   const [marchesParMois, setMarchesParMois] = useState([]);
   const [appelDOffres, setAppelDOffres] = useState([])
@@ -30,14 +27,34 @@ export default function Home() {
         response = await axios.get(`${process.env.REACT_APP_API_URL}/api/offre`);
         setOffres(response.data);
 
-        setValue((offres.length / 3 * 100 / appelDOffres.length).toFixed(2))
+        const countByMarcheID = [];
+        offres.forEach((offre) => {
+          const marcheIndex = countByMarcheID.findIndex((element) => element.marcheID === offre.marcheID);
+          if (marcheIndex !== -1) {
+            countByMarcheID[marcheIndex].count++;
+          } else {
+            countByMarcheID.push({ marcheID: offre.marcheID, count: 1 });
+          }
+        });
+
+        let countMarcheIDWithThreeOrMoreOffers = 0;
+        for (const marche of countByMarcheID) {
+          if (marche.count >= 3) {
+            countMarcheIDWithThreeOrMoreOffers++;
+          }
+        }
+
+        if (countByMarcheID.length !== 0) {
+          setValue((countMarcheIDWithThreeOrMoreOffers / countByMarcheID.length * 100).toFixed(2));
+        }
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [value]);
+  }, [value, offres]);
 
   const countMarchesParMois = () => {
     const marcheParMois = {};

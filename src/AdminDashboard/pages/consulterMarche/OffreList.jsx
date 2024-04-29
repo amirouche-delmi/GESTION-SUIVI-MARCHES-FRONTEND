@@ -4,7 +4,7 @@ import { formatDate, isEmpty } from "../../../utils/utils";
 import 'react-toastify/dist/ReactToastify.css';
 import "./ConsulterOffresList.scss";
 
-export default function Offres() {
+export default function OffreList() {
   const dispatch = useDispatch();
   const marcheData = useSelector((state) => state.marcheReducer);
   const allOffreData = useSelector((state) => state.allOffreReducer);
@@ -54,7 +54,7 @@ export default function Offres() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-              {(params.row.noteObtenue || "---") + "/100"}
+              {(params.row.noteObtenue || "---") + " / 100"}
           </div>
         );
       },

@@ -1,7 +1,6 @@
+import "./featuredInfo.scss";
 import { useEffect, useState } from "react";
-import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import TimelineIcon from '@mui/icons-material/Timeline';
 import axios from "axios";
 import { useSelector } from "react-redux";
 import PercentIcon from '@mui/icons-material/Percent';
@@ -45,7 +44,7 @@ export default function FeaturedInfo() {
             {marches.filter(item => item.dmID === userData._id).length} / {marches.length}</span>
           <span className="featuredMoneyRate">
           {
-            marches.length == 0 ? 
+            marches.length === 0 ? 
             '0.00' :
             (marches.filter(item => item.dmID === userData._id).length / marches.length * 100).toFixed(2)
           } <PercentIcon  className="featuredIcon negative"/>
@@ -72,7 +71,7 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Contrats</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">
+          <span className="featured-contrat-money">
             {isNaN(((contrats.filter(item => item.dmID === userData._id).reduce((acc, contract) => acc + contract.cout, 0)) / (contrats.filter(item => item.dmID === userData._id).length)).toFixed(2)) ?
               0
             :

@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
 import "./widgetLg.scss";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
-import { dateParser } from "../../../utils/utils";
 import { DeleteOutline, Visibility } from "@material-ui/icons";
 import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
-import { deleteMarche, resetMarcheReducer } from "../../../actions/marcheActions";
 import { Link } from "react-router-dom";
-import { resetBesoinReducer } from "../../../actions/besoinActions";
-import { resetValidationPrealableReducer } from "../../../actions/validationPrealableActions";
-import { resetCahierDesChargesReducer } from "../../../actions/cahierDesChargesActions";
-import { resetAppelDOffreReducer } from "../../../actions/appelDOffreActions";
+import { dateParser } from "../../../../../utils/utils";
+import { deleteMarche, resetMarcheReducer } from "../../../../../actions/marcheActions";
+import { resetBesoinReducer } from "../../../../../actions/besoinActions";
+import { resetValidationPrealableReducer } from "../../../../../actions/validationPrealableActions";
+import { resetCahierDesChargesReducer } from "../../../../../actions/cahierDesChargesActions";
+import { resetAppelDOffreReducer } from "../../../../../actions/appelDOffreActions";
+import { resetAttributionMarcheReducer } from "../../../../../actions/attributionMarcheActions";
+import { resetContratReducer } from "../../../../../actions/contratActions";
 
 export default function WidgetLg() {
 
@@ -33,6 +35,8 @@ export default function WidgetLg() {
         await dispatch(resetValidationPrealableReducer());
         await dispatch(resetCahierDesChargesReducer());
         await dispatch(resetAppelDOffreReducer());
+        await dispatch(resetAttributionMarcheReducer());
+        await dispatch(resetContratReducer());
 
       } catch (error) {
         console.error('Error fetching data:', error);

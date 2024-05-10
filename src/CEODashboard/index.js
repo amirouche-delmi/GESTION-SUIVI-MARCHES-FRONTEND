@@ -4,16 +4,16 @@ import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Profil from "./pages/profil/Profil";
-import EvaluerOffres from "./pages/evaluerOffres/EvaluerOffres";
-import EvaluationOffres from "./pages/evaluationOffres/EvaluationOffres";
-import EvaluerOffre from "./pages/evaluerOffre/EvaluerOffre";
-import AttribuerMarches from "./pages/attribuerMarches/AttribuerMarches";
-import AttributionMarche from "./pages/attributionMarche/AttributionMarche";
+import EvaluerOffres from "./pages/evaluation/evaluerOffres/EvaluerOffres";
+import EvaluationOffres from "./pages/evaluation/evaluationOffres/EvaluationOffres";
+import EvaluerOffre from "./pages/evaluation/evaluerOffre/EvaluerOffre";
+import AttribuerMarches from "./pages/attribution/attribuerMarches/AttribuerMarches";
+import AttributionMarche from "./pages/attribution/attributionMarche/AttributionMarche";
+import AttribuerMarche from './pages/attribution/attribuerMarche/AttribuerMarche';
 import ConsulterMarche from "./pages/consulterMarche/ConsulterMarche";
 import Email from "./pages/email/Email";
 import Messages from "./pages/messages/Messages";
-import AttribuerMarche from './pages/attribuerMarche/AttribuerMarche';
-import Marches from './pages/Marches/Marches';
+import Marches from './pages/marches/Marches';
 
 const CEODashboard = () => {
 

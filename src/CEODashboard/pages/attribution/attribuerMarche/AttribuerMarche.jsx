@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import { isEmpty } from "../../../utils/utils";
-import { getOffre, updateOffre } from "../../../actions/offreActions";
 import { Link } from 'react-router-dom';
-import LoadingComponent from "../../../pages/Loading/LoadingComponent";
+import { isEmpty } from "../../../../utils/utils";
+import { getOffre, updateOffre } from "../../../../actions/offreActions";
+import LoadingComponent from "../../../../pages/Loading/LoadingComponent";
 
 export default function AttribuerMarche() {
   const { offreID } = useParams();

@@ -1,13 +1,15 @@
 import "./featuredInfo.scss";
 import { useEffect, useState } from "react";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import TimelineIcon from '@mui/icons-material/Timeline';
 import axios from "axios";
 import * as React from 'react';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { useDispatch, useSelector } from "react-redux";
 
 export default function FeaturedInfo() { 
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userReducer);
   const [marches, setMarches] = useState([]);
   const [allOffreData, setAllOffreData] = useState([]);
   

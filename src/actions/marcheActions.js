@@ -33,6 +33,7 @@ export const updateMarche = (id, info) => {
           data: { 
             intitule: info.intitule,
             description: info.description,
+            ceoID: info.ceoID,
             etape: info.etape,
           }
       }).then((res) => {

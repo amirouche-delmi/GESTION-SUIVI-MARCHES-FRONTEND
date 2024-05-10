@@ -38,10 +38,7 @@ export const updateOffre = (id, info) => {
           url: `${process.env.REACT_APP_API_URL}/api/offre/${id}`,
           data: { 
             detailsProposition: info.detailsProposition,
-            noteConformite: info.noteConformite, 
-            noteCout: info.noteCout, 
-            noteExperience: info.noteExperience, 
-            noteInnovation: info.noteInnovation,
+            criteres: info.criteres,
             noteObtenue: info.noteObtenue,
             membresCommission: info.membresCommission,
             resultatEvaluation: info.resultatEvaluation,

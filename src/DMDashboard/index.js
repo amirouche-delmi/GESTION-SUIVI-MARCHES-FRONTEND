@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Profil from "./pages/profil/Profil";
 import AjouterMarche from "./pages/ajouterMarche/AjouterMarche";
+import AjouterCEO from "./pages/ajouterCEO/AjouterCEO";
 import GererMarches from "./pages/gererMarches/GererMarches";
 import EditerMarche from "./pages/editerMarche/EditerMarche";
 import ConsulterMarche from "./pages/consulterMarche/ConsulterMarche";
@@ -31,6 +32,7 @@ const DMDashboard = () => {
           <Route exact path="/" element={<Home />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/ajouter-marche" element={<AjouterMarche/>} />
+          <Route path="/ajouter-ceo" element={<AjouterCEO/>} />
           <Route path="/gerer-marches" element={<GererMarches />} />
           <Route path="/editer-marche/:marcheID" element={<EditerMarche />} />
           <Route path="/editer-offre/:offreID" element={<EditerOffre />} />

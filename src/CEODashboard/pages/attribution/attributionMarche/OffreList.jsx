@@ -2,15 +2,15 @@ import "./OffreList.scss";
 import { DataGrid } from "@material-ui/data-grid";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isEmpty } from "../../../utils/utils";
+import { isEmpty } from "../../../../utils/utils";
 import { toast } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from "sweetalert2";
-import { getAllOffre } from "../../../actions/offreActions";
+import { getAllOffre } from "../../../../actions/offreActions";
 import { Link } from "react-router-dom";
-import { getMarche, updateMarche } from "../../../actions/marcheActions";
+import { getMarche, updateMarche } from "../../../../actions/marcheActions";
 import axios from "axios";
-import { getAttributionMarche, updateAttributionMarche } from "../../../actions/attributionMarcheActions";
+import { getAttributionMarche, updateAttributionMarche } from "../../../../actions/attributionMarcheActions";
 
 export default function OffreList() {
   const dispatch = useDispatch();

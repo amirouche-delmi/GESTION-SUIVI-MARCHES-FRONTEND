@@ -16,10 +16,7 @@ import {
         return {
           ...state,
           detailsProposition: action.payload.detailsProposition,
-          noteConformite: action.payload.noteConformite, 
-          noteCout: action.payload.noteCout, 
-          noteExperience: action.payload.noteExperience, 
-          noteInnovation: action.payload.noteInnovation,
+          criteres: action.payload.criteres,
           noteObtenue: action.payload.noteObtenue,
           membresCommission: action.payload.membresCommission,
           resultatEvaluation: action.payload.resultatEvaluation,

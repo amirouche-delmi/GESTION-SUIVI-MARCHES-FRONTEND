@@ -2,12 +2,12 @@ import "./OffreList.scss";
 import { DataGrid } from "@material-ui/data-grid";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formatDate, isEmpty } from "../../../utils/utils";
+import { formatDate, isEmpty } from "../../../../utils/utils";
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
-import { getAllOffre } from "../../../actions/offreActions";
+import { getAllOffre } from "../../../../actions/offreActions";
 import { Link } from "react-router-dom";
-import { updateMarche } from "../../../actions/marcheActions";
+import { updateMarche } from "../../../../actions/marcheActions";
 import { useNavigate } from "react-router-dom";
 
 export default function OffreList() {

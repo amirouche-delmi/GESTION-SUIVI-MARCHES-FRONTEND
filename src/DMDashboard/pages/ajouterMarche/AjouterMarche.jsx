@@ -9,28 +9,35 @@ import AjouterCahierDesChargesForm from "./Forms/AjouterCahierDesChargesForm";
 import AjouterAppelDOffreForm from "./Forms/AjouterAppelDOffreForm";
 import AjouterOffreForm from "./Forms/AjouterOffreForm";
 import { toast } from "react-hot-toast";
+import { getAllUser } from "../../../actions/userActions";
+import { isEmpty } from "../../../utils/utils";
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import { Link } from "react-router-dom";
 
 export default function AjouterMarche() {
 
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
+  const allUserData = useSelector((state) => state.allUserReducer);
   const marcheData = useSelector((state) => state.marcheReducer);
 
   const [intitule, setIntitule] = useState("");
   const [description, setDescription] = useState("");
-
+  const [ceoID, setCeoID] = useState('');
   
   useEffect(() => {
     dispatch(resetMarcheReducer());
-  }, []);
+    dispatch(getAllUser());
+  }, [dispatch]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/marche`, {
         dmID: userData._id,
+        ceoID,
         intitule,
-        description
+        description,
       });
         
       await dispatch(getMarche(response.data.marcheID));
@@ -142,7 +149,21 @@ export default function AjouterMarche() {
               >
               </textarea>
             </div>
-            <input type="submit" className="submit-button" value="Enregistrer" />
+            <div className="form-item">
+              <label htmlFor="ceo">Nom CEO :</label>
+              <select id="ceo" name="ceo" onChange={(e) => setCeoID(e.target.value)} required>
+                <option value="">Choisissez</option>
+                {!isEmpty(allUserData) && allUserData.filter(user => user.role === 'CEO').map(user => (
+                  <option key={user._id} value={user._id}>{user.nom}</option>
+                  ))}
+              </select>
+            </div> 
+            <div className="submit-ceo-container">
+              <input type="submit" className="submit-button" value="Enregistrer" />
+              <Link to={"/ajouter-ceo/"}>
+                <button className="ceo-button" >Ajouter CEO &nbsp;<GroupAddOutlinedIcon /></button>
+              </Link>
+            </div>
         </form>
       )}
     </div>

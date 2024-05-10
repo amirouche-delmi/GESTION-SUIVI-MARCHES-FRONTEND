@@ -63,7 +63,7 @@ export default function FeaturedInfo() {
     <div className="featured">
       <div className="featuredItemMarche">
         <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', bottom: 0, right: 0, textAlign: 'right' }}>
+          <div style={{ position: 'absolute', bottom: 0, right: 0, textAlign: 'right', color: '#ff595e' }}>
             Total : {marches.length}
           </div>
         </div>
@@ -113,6 +113,11 @@ export default function FeaturedInfo() {
       </div>
 
       <div className="featuredItemContrat">
+      <div style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', bottom: 0, right: 0, textAlign: 'right', color: '#ff595e' }}>
+            Total : {contrats.length}
+          </div>
+        </div>
         <span className="featuredTitle">Contrats</span>
         <div className="featuredMoneyContainer">
           <span className="featured-contrat-money">

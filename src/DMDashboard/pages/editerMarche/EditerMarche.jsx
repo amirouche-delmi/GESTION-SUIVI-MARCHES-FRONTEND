@@ -23,26 +23,33 @@ import Cloturer from "./components/Cloturer";
 import EvaluationOffres from "./components/EvaluationOffres";
 import AttributionMarche from "./components/AttributionMarche";
 import LoadingComponent from "../../../pages/Loading/LoadingComponent";
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import { Link } from "react-router-dom";
+import { getAllUser } from "../../../actions/userActions";
 
 export default function EditerMarche() {
 
   const { marcheID } = useParams();
   const dispatch = useDispatch();
   const marcheData = useSelector((state) => state.marcheReducer);
+  const allUserData = useSelector((state) => state.allUserReducer);
 
   const [etape, setEtape] = useState(marcheData.etape+1);
   const [intitule, setIntitule] = useState(marcheData.intitule);
   const [description, setDescription] = useState(marcheData.description);
+  const [ceoID, setCeoID] = useState(marcheData.ceoID);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        await dispatch(getAllUser());
         await dispatch(getMarche(marcheID));
         await dispatch(resetBesoinReducer());
         await dispatch(resetValidationPrealableReducer());
         await dispatch(resetCahierDesChargesReducer());
         await dispatch(resetAppelDOffreReducer());
         await dispatch(resetContratReducer());
+
       } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données du marché :", error);
       }
@@ -73,6 +80,8 @@ export default function EditerMarche() {
         setEtape(marcheData.etape+1);
         setIntitule(marcheData.intitule)
         setDescription(marcheData.description)
+        setCeoID(marcheData.ceoID)
+
       } catch (error) {
         console.error("Une erreur s'est produite :", error);
       }
@@ -84,7 +93,7 @@ export default function EditerMarche() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(updateMarche(marcheID, { intitule, description, etape: marcheData.etape}));
+      await dispatch(updateMarche(marcheID, { intitule, description, ceoID, etape: marcheData.etape}));
       toast.success("Mis à jour avec réussie.", {
         duration: 6000,
         position: "bottom-right",
@@ -99,7 +108,7 @@ export default function EditerMarche() {
   };
 
   return (
-    !isEmpty(marcheData) && (
+    !isEmpty(marcheData) &&(
       <div className="editer-marche-container">
 {/* --------------------------------------------------------------------------------------------- */}
         <h2>Éditer Marché</h2>
@@ -183,10 +192,30 @@ export default function EditerMarche() {
                 <textarea id="description" name="description" required rows="4" cols="50" placeholder="Entrer la description du marché ..."
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
-                >
-                </textarea>
+                />
               </div>
-              <input type="submit" className="submit-button" value="Enregistrer" />
+              <div className="form-item">
+                <label htmlFor="ceo">Nom CEO :</label>
+                <select id="ceo" name="ceo" onChange={(e) => setCeoID(e.target.value)} required>
+                  <option value="">Choisissez</option>
+                  {!isEmpty(allUserData) && allUserData.map(user => {
+                    if (user.role === 'CEO') {
+                      if (user._id === ceoID) {
+                        return <option key={user._id} value={user._id} selected>{user.nom}</option>;
+                      } else {
+                        return <option key={user._id} value={user._id}>{user.nom}</option>;
+                      }
+                    }
+                    return null;
+                  })}
+                </select>
+              </div> 
+              <div className="submit-ceo-container">
+                <input type="submit" className="submit-button" value="Enregistrer" />
+                <Link to={"/ajouter-ceo/"}>
+                  <button className="ceo-button" >Ajouter CEO &nbsp;<GroupAddOutlinedIcon /></button>
+                </Link>
+              </div>
             </form>
           ) : etape === 2 ? (
             <Besoin />

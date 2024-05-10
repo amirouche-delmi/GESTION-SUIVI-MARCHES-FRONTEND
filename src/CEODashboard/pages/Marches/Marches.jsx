@@ -17,6 +17,7 @@ import LoadingComponent from "../../../pages/Loading/LoadingComponent";
 
 export default function Marches() {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userReducer);
   const allMarcheData = useSelector((state) => state.allMarcheReducer);
   
   useEffect(() => {    
@@ -124,7 +125,7 @@ export default function Marches() {
     ) : (
     < div className="marches-container">
         <DataGrid
-          rows={allMarcheData}
+          rows={allMarcheData.filter(item => (item.ceoID === userData._id))}
           disableSelectionOnClick
           columns={columns}
           pageSize={8}

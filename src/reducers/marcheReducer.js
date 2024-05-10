@@ -19,6 +19,7 @@ export default function marcheReducer(state = initialState, action) {
         ...state,
         intitule: action.payload.intitule,
         description: action.payload.description,
+        ceoID: action.payload.ceoID,
         etape: action.payload.etape,
       };
     default:

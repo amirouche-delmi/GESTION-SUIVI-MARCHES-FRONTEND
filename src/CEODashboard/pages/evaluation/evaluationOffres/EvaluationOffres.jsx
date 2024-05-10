@@ -1,16 +1,16 @@
-import "./AttributionMarche.scss";
+import "./EvaluationOffres.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMarche } from "../../../actions/marcheActions";
 import { useParams } from "react-router-dom";
-import { isEmpty } from "../../../utils/utils";
+import { getMarche } from "../../../../actions/marcheActions";
+import { isEmpty } from "../../../../utils/utils";
+import { getAllSoumissionnaire } from "../../../../actions/soumissionnaireActions";
+import { getAllOffre, resetOffreReducer } from "../../../../actions/offreActions";
+import LoadingComponent from "../../../../pages/Loading/LoadingComponent";
 import OffreList from "./OffreList";
-import { getAllSoumissionnaire } from "../../../actions/soumissionnaireActions";
-import { getAllOffre, resetOffreReducer } from "../../../actions/offreActions";
-import { getAttributionMarche } from "../../../actions/attributionMarcheActions";
-import LoadingComponent from "../../../pages/Loading/LoadingComponent";
 
-export default function AttribuerMarches() {
+export default function EvaluationOffres() {
+
   const { marcheID } = useParams();
   const dispatch = useDispatch();
   const marcheData = useSelector((state) => state.marcheReducer);
@@ -19,6 +19,7 @@ export default function AttribuerMarches() {
     const fetchData = async () => {
       try {
         await dispatch(getMarche(marcheID));
+        await dispatch()
       } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données du marché: ", error);
       }
@@ -29,10 +30,9 @@ export default function AttribuerMarches() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-          await dispatch(resetOffreReducer())
           await dispatch(getAllOffre());    
           await dispatch(getAllSoumissionnaire());
-          await dispatch(getAttributionMarche(marcheData.attributionMarcheID)) 
+          await dispatch(resetOffreReducer())
       } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données: ", error);
       }
@@ -44,10 +44,10 @@ export default function AttribuerMarches() {
     isEmpty(marcheData) ? (
       <LoadingComponent />
     ) : (
-      <div className="attribution-marche-container">
-      {/* ------------------------------------------------------------ */}
-        <h2>Attribution Marché</h2>
-      {/* ------------------------------------------------------------ */}
+      <div className="evaluation-offres-container">
+    {/* ------------------------------------------------------------ */}
+        <h2>Évaluation Offres</h2>
+    {/* ------------------------------------------------------------ */}
         <div className="progress-bar">
           <div className="step-item">
             <div className="step-text">Marché</div>
@@ -90,9 +90,9 @@ export default function AttribuerMarches() {
             <div className={"step-color" + (marcheData.etape === 9 ? " active-step" : (marcheData.etape > 9 ? " completed-step" : ""))}></div>
           </div>
         </div>
-        {/* ------------------------------------------------------------ */}          
+      {/* ------------------------------------------------------------ */}          
         <OffreList />      
-        {/* ------------------------------------------------------------ */}
+      {/* ------------------------------------------------------------ */}
     </div>
     )
   );

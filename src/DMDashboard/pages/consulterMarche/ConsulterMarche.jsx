@@ -19,10 +19,12 @@ import { getAllOffre } from "../../../actions/offreActions";
 import LoadingComponent from "../../../pages/Loading/LoadingComponent";
 import { getAttributionMarche } from "../../../actions/attributionMarcheActions";
 import { getContrat } from "../../../actions/contratActions";
+import { getAllUser } from "../../../actions/userActions";
 
 export default function ConsulterMarche() {
   const { marcheID } = useParams();
   const dispatch = useDispatch();
+  const allUserData = useSelector((state) => state.allUserReducer);
   const marcheData = useSelector((state) => state.marcheReducer);
   const besoinData = useSelector((state) => state.besoinReducer);
   const validationPrealableData = useSelector((state) => state.validationPrealableReducer);
@@ -36,6 +38,7 @@ export default function ConsulterMarche() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        await dispatch(getAllUser());
         await dispatch(getMarche(marcheID));
         if (marcheData.besoinID) {
           await dispatch(getBesoin(marcheData.besoinID));
@@ -68,7 +71,7 @@ export default function ConsulterMarche() {
   }, [dispatch, marcheData._id]);
 
   return (
-    isEmpty(marcheData) ? (
+    (isEmpty(allUserData) || isEmpty(marcheData)) ? (
       <LoadingComponent />
     ) : (
       <div className="consulter-marche-container">
@@ -130,6 +133,10 @@ export default function ConsulterMarche() {
             <AccordionDetails className="accordion-details">
               <label className="detail-label">Description :</label> 
               <div className="detail-content">{marcheData.description}</div>
+            </AccordionDetails>          
+            <AccordionDetails className="accordion-details">
+              <label className="detail-label">Nom CEO :</label> 
+              <div className="detail-content">{allUserData.find(user => user._id === marcheData.ceoID)?.nom}</div>
             </AccordionDetails>          
           </Accordion>
           {/* ------------------------------------------------------------ */}

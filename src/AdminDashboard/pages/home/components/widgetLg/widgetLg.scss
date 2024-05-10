@@ -1,49 +1,86 @@
-.widgetLg {
+.widgetLg-admin {
   flex: 2;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   padding: 20px;
   background-color: #fcfffc;
   
-  .widgetLgTitle {
+  h2 {
     font-size: 22px;
     font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .titles-container {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 15px;
   }
 
-  .widgetLgTable{
-    width: 100%;
-    border-spacing: 20px;
-  }
-
-  .widgetLgTh{
+  .widgetLgTh {
     text-align: left;
+    width: calc(20% - 20px); 
+  }
+  .intitule {
+    width: calc(25% - 20px);
+  }
+  .action {
+    width: calc(16% - 20px);
+  }
+
+  .data-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 10px; 
+    margin-bottom: 10px; 
   }
 
   .widgetLgName {
-    width: 20%;
+    width: calc(25% - 20px); 
   }
 
-  
-  .linearProgressContainer {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      width: 100%;
-      height: 25px;
-      background-color: #ebf1fe;
-      color: #2a7ade;
-      border-radius: 5px;
+  .linearProgressContainer {    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 25px;
+    width: calc(20% - 20px); 
+    background-color: #ebf1fe;
+    color: #2a7ade;
+    border-radius: 5px;
   }
-
   .linearProgress {
       width: 70%;
       height: 10px;
   }
 
+  .widgetLgDate {
+    width: calc(20% - 20px);
+  }
+
   .marcheAction {
+    // width: calc(20% - 20px);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+  }
+
+  .consulterButton{
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #ebf1fe;
+    color: #2a7ade;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  .consulterIcon{
+    font-size: 16px !important;
+    margin-right: 5px;
   }
 
   .productListEdit{
@@ -54,29 +91,11 @@
     color: white;
     cursor: pointer;
     margin-right: 10px;
-}
+  }
 
-.productListDelete{
-    color: red;
-    cursor: pointer;
-}
-
-.consulterButton{
-    display: flex;
-    align-items: center;
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: #ebf1fe;
-    color: #2a7ade;
-    cursor: pointer;
-    margin-right: 10px;
-
-}
-
-.consulterIcon{
-    font-size: 16px !important;
-    margin-right: 5px;
-}
+  .productListDelete{
+      color: red;
+      cursor: pointer;
+  }
 
 }

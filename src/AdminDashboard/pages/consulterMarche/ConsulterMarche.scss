@@ -124,5 +124,54 @@
     cursor: pointer;
    }
 
+// ---------------------------------------
+
+.infos-data-warehouse {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.infos-data-warehouse > div {
+  flex: 1; 
+  text-align: center; 
+  padding: 10px; 
+  margin: 5px; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  color: #ffffff; 
+  font-size: 12px; 
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease; 
+}
+
+.infos-data-warehouse > div:hover {
+  transform: scale(1.05); 
+}
+
+.delaiSoumissionOffres {
+  background-color: #4169e1; 
+}
+
+.nombreOffresSoumises {
+  background-color: #009a9d; /* DarkTurquoise */
+}
+
+.coutMoyenneOffres {
+  background-color: #0f7deb; /* DodgerBlue */
+}
+
+.noteMoyenneOffres {
+  background-color: #12a57e; /* LightSeaGreen */
+}
+
+.montantMarche {
+  background-color: #2274b8; /* SteelBlue */
+}
+
+.infos-data-warehouse > div > span {
+  display: block;
+  margin-top: 5px;
+}
 
 }

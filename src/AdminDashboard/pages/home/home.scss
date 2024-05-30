@@ -1,33 +1,96 @@
 .home-admin{
     flex: 4;
     
-    .homeWidgets{
-        display: flex;
-        margin: 20px;
-    }
+.homeWidgets{
+    display: flex;
+    margin: 20px;
+}
 
 .chart-infos-container {
     display: flex;
     flex-direction: row;
+    
+    .chartContainer {
+        width: 72%;
+        margin: 20px;
+        padding-bottom: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    }
+    
+    .left-info-container {
+        width: 25%;
+        margin: 20px 20px 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    }
 }
 
-.chartContainer {
-    width: 72%;
-    margin: 20px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+// ----------------------------------------------
+
+.chart-soumissionnaires-infos-container {
+    display: flex;
+    flex-direction: row;
+
+    .chartContainer {
+        width: 72%;
+        margin: 0px 20px 20px 20px;
+        padding-bottom: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    }
+    
+    .left-info-container {
+        width: 25%;
+        margin: 0px 20px 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    }
 }
 
-.left-info-container {
-    width: 25%;
-    margin: 20px 20px 20px 0;
-    padding: 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+// --------------------------------------------
+
+.maxOccurrencesSelection {  
+    text-align: right;
+    color: #16E0BD;
 }
+
+.featuredTitle{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.motif {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ligne {
+    border: 1px solid #ccc; 
+    margin: 15px 0px; 
+}
+
+.maxOccurrencesRejet {
+    text-align: right;
+    color: #ff595e;
+}
+
+.featuredSub{
+    margin-top: 20px;
+    font-size: 15px;
+    color: gray;
+    text-align: center;
+}
+
 }

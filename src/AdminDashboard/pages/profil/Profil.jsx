@@ -156,7 +156,7 @@ export default function Profil() {
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} />
               </div>
-              <button className="userUpdateButton">Update</button>
+              <button className="userUpdateButton">Éditer</button>
             </div>
             </form>
         </div>

@@ -145,15 +145,9 @@ export default function Profil() {
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} />
               </div>
-              <button className="userUpdateButton">Update</button>
+              <button className="userUpdateButton">Éditer</button>
             </div>
           </form>
-          <div id="popupMessageSuccess" class="popup-hidden">
-            Mise à jour réussie !
-          </div>
-          <div id="popupMessageWarning" class="popup-hidden">
-            Mise à jour échouée !
-          </div>
         </div>
       </div>
     </div>

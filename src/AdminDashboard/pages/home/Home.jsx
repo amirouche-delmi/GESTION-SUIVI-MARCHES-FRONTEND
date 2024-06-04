@@ -6,8 +6,6 @@ import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 export default function Home() {
   const [marches, setMarches] = useState([]);
@@ -17,7 +15,6 @@ export default function Home() {
   const [dimOffre, setDimOffre] = useState([]);
   const [value, setValue] = useState(0);
   const [soumissionnaireClassement, setSoumissionnaireClassement] = useState([]);
-  const [dimAppelDOffre, setDimAppelDOffre] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,23 +24,21 @@ export default function Home() {
           axios.get(`${process.env.REACT_APP_API_URL}/api/appel-d-offre`),
           axios.get(`${process.env.REACT_APP_API_URL}/api/offre`),
           axios.get(`${process.env.REACT_APP_API_URL}/api/dim-offre`),
-          axios.get(`${process.env.REACT_APP_API_URL}/api/dim-appel-d-offre`)
         ]);
 
         setMarches(marchesResponse.data);
         setAppelDOffres(appelDOffresResponse.data);
         setOffres(offresResponse.data);
         setDimOffre(dimOffreResponse.data);
-        setDimAppelDOffre(dimAppelDOffreResponse.data);
 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+    
     fetchData();
   }, []);
-
+  
   useEffect(() => {
     const countByMarcheID = offres.reduce((acc, offre) => {
       acc[offre.marcheID] = (acc[offre.marcheID] || 0) + 1;
@@ -95,41 +90,40 @@ export default function Home() {
     setSoumissionnaireClassement(formattedSoumissionnaireData);
   }, [dimOffre]);
 
+  // Compteur pour les motifs de sélection et de rejet
+  let motifsSelection = {};
+  let motifsRejet = {};
 
-// Compteur pour les motifs de sélection et de rejet
-let motifsSelection = {};
-let motifsRejet = {};
+  // Parcours des offres pour compter les motifs
+  dimOffre.forEach(offre => {
+    if (offre.resultatEvaluation === 'Accepte') {
+      motifsSelection[offre.motif] = (motifsSelection[offre.motif] || 0) + 1;
+    } else if (offre.resultatEvaluation === 'Rejete') {
+      motifsRejet[offre.motif] = (motifsRejet[offre.motif] || 0) + 1;
+    }
+  });
 
-// Parcours des offres pour compter les motifs
-dimOffre.forEach(offre => {
-  if (offre.resultatEvaluation === 'Accepte') {
-    motifsSelection[offre.motif] = (motifsSelection[offre.motif] || 0) + 1;
-  } else if (offre.resultatEvaluation === 'Rejete') {
-    motifsRejet[offre.motif] = (motifsRejet[offre.motif] || 0) + 1;
-  }
-});
+  // Trouver le motif de sélection le plus fréquent
+  let motifSelectionPlusFrequent = '';
+  let maxOccurrencesSelection = 0;
 
-// Trouver le motif de sélection le plus fréquent
-let motifSelectionPlusFrequent = '';
-let maxOccurrencesSelection = 0;
+  Object.entries(motifsSelection).forEach(([motif, occurrences]) => {
+    if (occurrences > maxOccurrencesSelection) {
+      maxOccurrencesSelection = occurrences;
+      motifSelectionPlusFrequent = motif;
+    }
+  });
 
-Object.entries(motifsSelection).forEach(([motif, occurrences]) => {
-  if (occurrences > maxOccurrencesSelection) {
-    maxOccurrencesSelection = occurrences;
-    motifSelectionPlusFrequent = motif;
-  }
-});
+  // Trouver le motif de rejet le plus fréquent
+  let motifRejetPlusFrequent = '';
+  let maxOccurrencesRejet = 0;
 
-// Trouver le motif de rejet le plus fréquent
-let motifRejetPlusFrequent = '';
-let maxOccurrencesRejet = 0;
-
-Object.entries(motifsRejet).forEach(([motif, occurrences]) => {
-  if (occurrences > maxOccurrencesRejet) {
-    maxOccurrencesRejet = occurrences;
-    motifRejetPlusFrequent = motif;
-  }
-});
+  Object.entries(motifsRejet).forEach(([motif, occurrences]) => {
+    if (occurrences > maxOccurrencesRejet) {
+      maxOccurrencesRejet = occurrences;
+      motifRejetPlusFrequent = motif;
+    }
+  }); 
 
   return (
     <div className="home-admin">
@@ -192,7 +186,6 @@ Object.entries(motifsRejet).forEach(([motif, occurrences]) => {
           </ResponsiveContainer>
         </div>
 
-        {/*  */}
         <div className="left-info-container">
           <div className="maxOccurrencesSelection">Fréquence : {maxOccurrencesSelection}</div>
           <div className="featuredTitle">Séléction</div>
@@ -213,6 +206,7 @@ Object.entries(motifsRejet).forEach(([motif, occurrences]) => {
       <div className="homeWidgets">
         <WidgetLg />
       </div>
+
     </div>
   );
 }

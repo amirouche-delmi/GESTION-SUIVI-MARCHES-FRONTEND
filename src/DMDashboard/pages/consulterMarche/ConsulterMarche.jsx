@@ -19,12 +19,12 @@ import { getAllOffre } from "../../../actions/offreActions";
 import LoadingComponent from "../../../pages/Loading/LoadingComponent";
 import { getAttributionMarche } from "../../../actions/attributionMarcheActions";
 import { getContrat } from "../../../actions/contratActions";
-import { getAllUser } from "../../../actions/userActions";
+import { useState } from "react";
+import axios from "axios";
 
 export default function ConsulterMarche() {
   const { marcheID } = useParams();
   const dispatch = useDispatch();
-  const allUserData = useSelector((state) => state.allUserReducer);
   const marcheData = useSelector((state) => state.marcheReducer);
   const besoinData = useSelector((state) => state.besoinReducer);
   const validationPrealableData = useSelector((state) => state.validationPrealableReducer);
@@ -35,10 +35,11 @@ export default function ConsulterMarche() {
   const attributionMarcheData = useSelector((state) => state.attributionMarcheReducer);  
   const contratData = useSelector((state) => state.contratReducer);  
 
+  const [faitMarche, setFaitMarche] = useState(null)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(getAllUser());
         await dispatch(getMarche(marcheID));
         if (marcheData.besoinID) {
           await dispatch(getBesoin(marcheData.besoinID));
@@ -55,13 +56,14 @@ export default function ConsulterMarche() {
           await dispatch(getAllSoumissionnaire()); 
         }
         if (marcheData.attributionMarcheID) {
-          await dispatch(getAttributionMarche(marcheData.attributionMarcheID));  
-          console.log('att', attributionMarcheData);  
+          await dispatch(getAttributionMarche(marcheData.attributionMarcheID));    
         }
         if (marcheData.contratID) {
           await dispatch(getContrat(marcheData.contratID));    
-          console.log('cont', contratData);  
         }
+
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/data-warehouse/${marcheID}`);
+        setFaitMarche(response.data[0])
         
       } catch (error) {
         console.error("Une erreur s'est produite lors de la récupération des données du marché :", error);
@@ -71,7 +73,7 @@ export default function ConsulterMarche() {
   }, [dispatch, marcheData._id]);
 
   return (
-    (isEmpty(allUserData) || isEmpty(marcheData)) ? (
+    isEmpty(marcheData) ? (
       <LoadingComponent />
     ) : (
       <div className="consulter-marche-container">
@@ -133,11 +135,7 @@ export default function ConsulterMarche() {
             <AccordionDetails className="accordion-details">
               <label className="detail-label">Description :</label> 
               <div className="detail-content">{marcheData.description}</div>
-            </AccordionDetails>          
-            <AccordionDetails className="accordion-details">
-              <label className="detail-label">Nom CEO :</label> 
-              <div className="detail-content">{allUserData.find(user => user._id === marcheData.ceoID)?.nom}</div>
-            </AccordionDetails>          
+            </AccordionDetails>                  
           </Accordion>
           {/* ------------------------------------------------------------ */}
           {!isEmpty(besoinData) && (
@@ -334,8 +332,17 @@ export default function ConsulterMarche() {
               </AccordionDetails>                 
             </Accordion>
           )}
-          {/* ------------------------------------------------------------ */}
         </div>
+        {/* ------------------------------------------------------------ */}
+        {!isEmpty(faitMarche) && (
+          <div className="infos-data-warehouse">
+            {faitMarche.delaiSoumissionOffres != 0 && <div className="delaiSoumissionOffres">Délai Soumission Offres <span>{faitMarche.delaiSoumissionOffres} Jours</span></div>}
+            {faitMarche.nombreOffresSoumises != 0 && <div className="nombreOffresSoumises">Nombre Offres Soumises <span>{faitMarche.nombreOffresSoumises} Offres</span></div>}
+            {faitMarche.coutMoyenneOffres != 0 && <div className="coutMoyenneOffres">Coût Moyenne Offres <span>{faitMarche.coutMoyenneOffres} DA</span></div>}
+            {faitMarche.noteMoyenneOffres != 0 && <div className="noteMoyenneOffres">Note Moyenne Offres <span>{faitMarche.noteMoyenneOffres} / 100</span></div>}
+            {faitMarche.montantMarche != 0 && <div className="montantMarche">Montant Marché <span>{faitMarche.montantMarche} DA</span></div>}
+          </div>
+        )}
       </div>
     )
   )

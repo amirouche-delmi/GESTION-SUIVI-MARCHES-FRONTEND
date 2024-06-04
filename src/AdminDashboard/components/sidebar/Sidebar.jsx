@@ -52,7 +52,7 @@ export default function Sidebar() {
             <li className={`sidebarListItem ${location.pathname === '/gerer-utilisateurs' ? 'active' : ''}`}>
               <ManageAccountsOutlinedIcon className="sidebarIcon" />
               <Link to="/gerer-utilisateurs" className="link">
-                Gerer Utilisateurs
+                Gérer Utilisateurs
               </Link>
             </li>
             <li className={`sidebarListItem ${location.pathname === '/gerer-marches' ? 'active' : ''}`}>

@@ -94,7 +94,7 @@ export default function EditerMarche() {
     e.preventDefault();
     try {
       await dispatch(updateMarche(marcheID, { intitule, description, ceoID, etape: marcheData.etape}));
-      toast.success("Mis à jour avec réussie.", {
+      toast.success("Mis à jour réussie.", {
         duration: 6000,
         position: "bottom-right",
       });

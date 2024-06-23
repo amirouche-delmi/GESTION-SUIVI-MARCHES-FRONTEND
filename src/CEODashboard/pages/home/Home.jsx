@@ -1,7 +1,6 @@
 import "./home.scss";
 import FeaturedInfo from "./components/featuredInfo/FeaturedInfo";
 import WidgetLg from "./components/widgetLg/WidgetLg";
-import Marches from "../marches/Marches";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -29,7 +28,7 @@ export default function Home() {
     const marcheParMois = {};
     marches.forEach((marche) => {
       const date = new Date(marche.createdAt);
-      const mois = `${date.getFullYear()}-${date.getMonth() + 1}`;
+      const mois = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
       marcheParMois[mois] = (marcheParMois[mois] || 0) + 1;
     });
     return marcheParMois;
@@ -37,11 +36,15 @@ export default function Home() {
 
   useEffect(() => {
     const marchesParMoisData = countMarchesParMois();
-    const formattedData = Object.keys(marchesParMoisData).map((mois) => ({
-      mois: `${new Date(mois).toLocaleString('default', { month: 'short' })}-${new Date(mois).getFullYear()}`,
-      "Nombre total de Marchés": marchesParMoisData[mois],
-      "Nombre de Marchés évalués": marches.filter(item => item.ceoID === userData._id && new Date(item.createdAt).getMonth() + 1 === parseInt(mois.split('-')[1])).length
-    }));
+    const formattedData = Object.keys(marchesParMoisData).map((mois) => {
+      const [year, month] = mois.split('-');
+      const moisDate = new Date(year, month - 1);
+      return {
+        mois: `${moisDate.toLocaleString('default', { month: 'short' })}-${moisDate.getFullYear()}`,
+        "Nombre total de Marchés": marchesParMoisData[mois],
+        "Nombre de Marchés évalués": marches.filter(item => item.ceoID === userData._id && `${item.createdAt.split('T')[0].split('-')[0]}-${String(new Date(item.createdAt).getMonth() + 1).padStart(2, '0')}` === mois).length
+      };
+    });
     setMarchesParMois(formattedData.reverse());
   }, [marches, userData]);
 

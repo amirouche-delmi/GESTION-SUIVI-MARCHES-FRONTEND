@@ -78,11 +78,21 @@ export default function OffreList() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-              {params.row.membresCommission[0] || "---"}
+            {params.row.membresCommission.length === 0 ? (
+              <span>{"---"}</span>
+            ) : (
+              <span>
+                {params.row.membresCommission.length === 1 ? (
+                  params.row.membresCommission[0]
+                ) : (
+                  params.row.membresCommission.join(', ')
+                )}
+              </span>
+            )}
           </div>
         );
       },
-    },
+    },    
     {
       field: "nomSoumissionnaire",
       headerName: "Nom Soumissionnaire",

@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [marchesResponse, appelDOffresResponse, offresResponse, dimOffreResponse, dimAppelDOffreResponse] = await Promise.all([
+        const [marchesResponse, appelDOffresResponse, offresResponse, dimOffreResponse] = await Promise.all([
           axios.get(`${process.env.REACT_APP_API_URL}/api/marche`),
           axios.get(`${process.env.REACT_APP_API_URL}/api/appel-d-offre`),
           axios.get(`${process.env.REACT_APP_API_URL}/api/offre`),
@@ -56,15 +56,19 @@ export default function Home() {
   useEffect(() => {
     const marchesParMoisData = marches.reduce((acc, marche) => {
       const date = new Date(marche.createdAt);
-      const mois = `${date.getFullYear()}-${date.getMonth() + 1}`;
+      const mois = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
       acc[mois] = (acc[mois] || 0) + 1;
       return acc;
     }, {});
 
-    const formattedData = Object.keys(marchesParMoisData).map(mois => ({
-      mois: `${new Date(mois).toLocaleString('default', { month: 'short' })}-${new Date(mois).getFullYear()}`,
-      "Nombre total de Marchés": marchesParMoisData[mois],
-    }));
+    const formattedData = Object.keys(marchesParMoisData).map(mois => {
+      const [year, month] = mois.split('-');
+      const moisDate = new Date(year, month - 1);
+      return {
+        mois: `${moisDate.toLocaleString('default', { month: 'short' })}-${moisDate.getFullYear()}`,
+        "Nombre total de Marchés": marchesParMoisData[mois],
+      };
+    });
 
     setMarchesParMois(formattedData.reverse());
   }, [marches]);
@@ -82,7 +86,9 @@ export default function Home() {
       return acc;
     }, allSoumissionnaires);
 
-    const formattedSoumissionnaireData = Object.keys(soumissionnaireCounts).map(nom => ({
+    const formattedSoumissionnaireData = Object.keys(soumissionnaireCounts)
+    .filter(nom => soumissionnaireCounts[nom] > 0)
+    .map(nom => ({
       nom: nom,
       "Nombre de Marchés Attribués": soumissionnaireCounts[nom],
     }));
@@ -144,7 +150,7 @@ export default function Home() {
         <div className="left-info-container">
           <span className="featuredTitle">Offres</span>
           <div className="featuredMoneyContainer">
-            <span className="featuredMoney">{offres.length} / {appelDOffres.length}</span>
+            <span className="featuredMoney offres">{offres.length} / {appelDOffres.length}</span>
             <span className="featuredMoneyRate">
               {(offres.length / (appelDOffres.length || 1)).toFixed(2)}
               {(offres.length / (appelDOffres.length || 1)).toFixed(2) >= 3 ? <ArrowUpward className="featuredIcon" /> : <ArrowDownward className="featuredIcon negative" />}
@@ -178,7 +184,7 @@ export default function Home() {
             <BarChart data={soumissionnaireClassement} margin={{ top: 20, left: -15, right: 20 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="nom" tickFormatter={(value) => value.slice(0, 5)+ '...'} />
-              <YAxis />
+              <YAxis tickCount={soumissionnaireClassement.length} domain={[0, 'dataMax']} allowDecimals={false} />
               <Tooltip />
               <Legend />
               <Bar dataKey="Nombre de Marchés Attribués" fill="#28a745" />

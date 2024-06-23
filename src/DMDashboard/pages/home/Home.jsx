@@ -28,7 +28,7 @@ export default function Home() {
     const marcheParMois = {};
     marches.forEach((marche) => {
       const date = new Date(marche.createdAt);
-      const mois = `${date.getFullYear()}-${date.getMonth() + 1}`;
+      const mois = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
       marcheParMois[mois] = (marcheParMois[mois] || 0) + 1;
     });
     return marcheParMois;
@@ -36,11 +36,15 @@ export default function Home() {
 
   useEffect(() => {
     const marchesParMoisData = countMarchesParMois();
-    const formattedData = Object.keys(marchesParMoisData).map((mois) => ({
-      mois: `${new Date(mois).toLocaleString('default', { month: 'short' })}-${new Date(mois).getFullYear()}`,
-      "Nombre total de Marchés": marchesParMoisData[mois],
-      "Nombre de Marchés créés": marches.filter(item => item.dmID === userData._id && new Date(item.createdAt).getMonth() + 1 === parseInt(mois.split('-')[1])).length
-    }));
+    const formattedData = Object.keys(marchesParMoisData).map((mois) => {
+      const [year, month] = mois.split('-');
+      const moisDate = new Date(year, month - 1);
+      return {
+        mois: `${moisDate.toLocaleString('default', { month: 'short' })}-${moisDate.getFullYear()}`,
+        "Nombre total de Marchés": marchesParMoisData[mois],
+        "Nombre de Marchés créés": marches.filter(item => item.dmID === userData._id && new Date(item.createdAt).getFullYear() === parseInt(year) && (new Date(item.createdAt).getMonth() + 1) === parseInt(month)).length
+      };
+    });
     setMarchesParMois(formattedData.reverse());
   }, [marches, userData]);
 
